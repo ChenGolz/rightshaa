@@ -12,30 +12,21 @@
   <header>
     
   <div class="container">
-      <h1>אתר סיוע למשפחות שכולות 7.10.2023
-<p style="opacity:0.8;margin-top:8px;">
-מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023 — במקום אחד.
-</p></h1>
-      <p>מידע, זכויות, ארגוני סיוע וכלים מעשיים ורגשיים — במקום אחד.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" id="openBreatheTop">רגע של נשימה</button>
-        <a class="btn btn-secondary" href="#letters">מחולל פנייה מהירה
-<p style="opacity:0.8">
-אפשר ליצור מכתב גם בלי למלא פרטים — המערכת תייצר נוסח כללי שאפשר לשלוח במייל.
-אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי למשפחות 7.10. הפרטים שאתם מזינים אינם נשמרים באתר.
-</p>
-</a>
-        <a class="btn btn-secondary" href="#benefitsTracker">מעקב זכויות</a>
-        <button class="btn btn-secondary" id="themeToggle">מצב לילה</button>
-        <button class="btn btn-secondary" id="printPlanBtn">הדפסה</button>
-        <button class="btn btn-secondary" id="downloadPdfBtn">הורדה כ‑PDF</button>
-        <button class="btn btn-secondary" id="pdfLetterBtn">הורדה כ‑PDF</button>
+      <h1 class="hero-title">מרכז סיוע למשפחות שכולות<br><span class="hero-date">7 באוקטובר 2023</span></h1>
+      <p class="hero-subtitle">מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר — במקום אחד.</p>
+      <div class="hero-actions clean-actions">
+        <a class="btn btn-primary" href="#breatheSection">🫁 רגע של נשימה</a>
+        <a class="btn btn-secondary" href="#letters">✉️ פנייה מהירה</a>
+        <a class="btn btn-secondary" href="#benefitsTracker">📋 זכויות וסיוע</a>
+        <a class="btn btn-secondary" href="#smartTimeline">📅 תאריכים חשובים</a>
+        <a class="btn btn-secondary" href="#mapSection">🗺️ עזרה קרובה</a>
+        <button class="btn btn-secondary" id="downloadPdfBtn">⬇️ הורדת PDF</button>
       </div>
     </div>
   </header>
 
-  <nav>
-    <div class="container nav-wrap">
+  <nav class="top-nav">
+    <div class="container nav-wrap compact-nav">
       <a href="#letters">פנייה מהירה</a>
       <a href="#benefitsTracker">זכויות וסיוע</a>
       <a href="#smartTimeline">תאריכים חשובים</a>
@@ -43,12 +34,17 @@
       <a href="#mapSection">מפה</a>
       <a href="#officialResources">גורמי סיוע</a>
       <a href="#kidsCorner">ילדים ונוער</a>
-      <a href="#breatheSection">לנשום</a>
       <a href="#help">מוקדי חירום</a>
     </div>
   </nav>
 
-  <a class="floating-breathe" href="#breatheSection">לנשום</a>
+  <section class="soft-note-banner">
+    <div class="container">
+      <p>אם אתם מרגישים מוצפים, אפשר להתחיל מ<strong>רגע של נשימה</strong> — ואחר כך לעבור ל<strong>פנייה מהירה</strong> או ל<strong>מוקדי החירום</strong>.</p>
+    </div>
+  </section>
+
+  <a class="floating-breathe" href="#breatheSection">🫁 רגע של נשימה</a>
 
   <div class="breathe-modal hidden" id="breatheModal" aria-hidden="true">
     <div class="breathe-card">
@@ -70,7 +66,7 @@
 
   <div class="container">
     <section id="letters" class="card section quick-target" data-kind="all military terror civil">
-      <h2>מחולל פנייה מהירה
+      <h2>פנייה מהירה לגורמי סיוע
 <p style="opacity:0.8">
 אפשר ליצור מכתב גם בלי למלא פרטים — המערכת תייצר נוסח כללי שאפשר לשלוח במייל.
 אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי למשפחות 7.10. הפרטים שאתם מזינים אינם נשמרים באתר.
@@ -196,7 +192,7 @@
     </section>
 
     <section id="mapSection" class="card section">
-      <h2>מפת עזרה קרובה למשפחות 7.10</h2>
+      <h2>עזרה קרובה אליי</h2>
       <p class="muted">מפה חלקית של מוקדי סיוע רלוונטיים: מרכזי חוסן, ביטוח לאומי וגורמי תמיכה. המפה עדיין חלקית ולכן הוספנו גם קישורים רשמיים לרשימות המלאות.</p>
       <div class="actions-row">
         <button class="btn btn-primary" id="locateMeBtn">מצא מרכז קרוב אליי</button>
@@ -313,7 +309,7 @@
     </section>
 
     <section id="officialResources" class="card section">
-      <h2>גורמי סיוע מרכזיים למשפחות 7.10</h2>
+      <h2>גורמי סיוע מרכזיים</h2>
       <div class="kids-grid">
         <div class="mini-card">
           <h3>ביטוח לאומי — נפגעי פעולות איבה</h3>
@@ -350,7 +346,7 @@
     </section>
 
     <section id="kidsCorner" class="card section">
-      <h2>ילדים ונוער במשפחות 7.10</h2>
+      <h2>ילדים ונוער</h2>
       <p class="muted">אזור זה מיועד להורים, אחים ובני משפחה שמלווים ילדים ובני נוער אחרי אובדן באירועי 7 באוקטובר.</p>
       <div class="kids-grid">
         <div class="mini-card">

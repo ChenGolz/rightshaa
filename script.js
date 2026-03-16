@@ -1033,3 +1033,58 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 });
+
+
+// v24 UI polish
+document.addEventListener("DOMContentLoaded", () => {
+  const floatingBreathe = document.getElementById("floatingBreathe");
+  if (floatingBreathe) {
+    floatingBreathe.onclick = () => {
+      const target = document.getElementById("breatheSection");
+      if (target) target.scrollIntoView({behavior:"smooth", block:"start"});
+    };
+  }
+
+  // If there are multiple download buttons, keep the first visible one working
+  const pdfButtons = Array.from(document.querySelectorAll("#downloadPdfBtn"));
+  pdfButtons.forEach((btn) => {
+    btn.onclick = () => {
+      const output = document.getElementById("letterOutput");
+      if (!output) return;
+      if (!output.value) {
+        const gen = document.getElementById("generateLetter");
+        if (gen) gen.click();
+      }
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "32px";
+      wrapper.style.fontFamily = "Arial, sans-serif";
+      wrapper.style.direction = "rtl";
+      wrapper.style.lineHeight = "1.8";
+      wrapper.innerText = output.value || "";
+      if (window.html2pdf) {
+        html2pdf().set({
+          margin: 10,
+          filename: "pniya-710.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+        }).from(wrapper).save();
+      }
+    };
+  });
+
+  const mailBtn = document.getElementById("generateMailBtn");
+  if (mailBtn) {
+    mailBtn.onclick = () => {
+      const output = document.getElementById("letterOutput");
+      if (!output) return;
+      if (!output.value) {
+        const gen = document.getElementById("generateLetter");
+        if (gen) gen.click();
+      }
+      const subject = encodeURIComponent("פנייה בנושא זכויות וסיוע למשפחת 7.10");
+      const body = encodeURIComponent(output.value || "");
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    };
+  }
+});
