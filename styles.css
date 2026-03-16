@@ -311,3 +311,138 @@ textarea{
   .form-grid,.form-grid.two-col,.cards-grid{grid-template-columns:1fr}
   .hero-subtitle{font-size:.98rem}
 }
+
+
+/* v26 hard overrides to prevent oversized hero pills from older cached CSS */
+.hero-actions{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr)) !important;
+  gap:12px !important;
+  max-width:980px !important;
+  margin:24px auto 0 !important;
+}
+.hero-actions .btn,
+.hero-actions a,
+.hero-actions button{
+  min-height:54px !important;
+  height:auto !important;
+  max-height:none !important;
+  padding:12px 16px !important;
+  border-radius:16px !important;
+  writing-mode:horizontal-tb !important;
+  white-space:normal !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  overflow:hidden !important;
+}
+.hero-subtitle{
+  max-width:860px !important;
+  margin:14px auto 0 !important;
+  text-align:center !important;
+}
+.soft-note-banner{
+  position:relative;
+  z-index:2;
+}
+#letters{
+  position:relative;
+  z-index:1;
+}
+
+/* prettier breathing area */
+.breathe-pretty{
+  background:
+    radial-gradient(circle at top, rgba(129,176,213,0.14), transparent 35%),
+    rgba(15,35,56,0.82) !important;
+}
+.breathe-soft-text{
+  color:var(--text-soft);
+  font-size:1rem;
+  margin-bottom:8px;
+}
+.breathe-panel{
+  padding-top:8px;
+}
+.breathe-circle{
+  width:180px !important;
+  height:180px !important;
+  border-radius:50% !important;
+  background:linear-gradient(180deg,#edf7ff,#dbeaf4) !important;
+  color:#264864 !important;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,0.16),
+    0 0 0 14px rgba(255,255,255,0.04),
+    0 0 0 28px rgba(255,255,255,0.025) !important;
+  font-size:1.6rem !important;
+}
+.breathe-circle span{
+  font-size:1.55rem !important;
+}
+.breathe-status{
+  font-size:1.08rem !important;
+}
+#startBreathe,
+#stopBreathe{
+  min-width:150px;
+}
+
+/* bigger prettier floating breathe button */
+.floating-breathe{
+  left:18px !important;
+  bottom:18px !important;
+  padding:18px 24px !important;
+  border-radius:22px !important;
+  background:linear-gradient(135deg,#6bb38e,#4f8f72) !important;
+  color:#fff !important;
+  font-size:1.02rem !important;
+  font-weight:800 !important;
+  box-shadow:
+    0 14px 34px rgba(0,0,0,0.22),
+    0 0 0 8px rgba(107,179,142,0.12) !important;
+}
+.floating-breathe:hover{
+  transform:translateY(-1px) scale(1.01);
+}
+.floating-breathe::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:28px;
+  border:1px solid rgba(255,255,255,0.18);
+  pointer-events:none;
+}
+.floating-breathe{
+  position:fixed;
+}
+.floating-breathe-pulse{
+  animation:breathePulse 2.2s ease-in-out infinite;
+}
+@keyframes breathePulse{
+  0%{box-shadow:0 14px 34px rgba(0,0,0,0.22), 0 0 0 0 rgba(107,179,142,0.22)}
+  70%{box-shadow:0 14px 34px rgba(0,0,0,0.22), 0 0 0 16px rgba(107,179,142,0)}
+  100%{box-shadow:0 14px 34px rgba(0,0,0,0.22), 0 0 0 0 rgba(107,179,142,0)}
+}
+
+@media (max-width: 680px){
+  .hero-actions{
+    grid-template-columns:1fr !important;
+  }
+  .hero-actions .btn,
+  .hero-actions a,
+  .hero-actions button{
+    min-height:50px !important;
+  }
+  .breathe-circle{
+    width:150px !important;
+    height:150px !important;
+  }
+  .floating-breathe{
+    left:12px !important;
+    right:12px !important;
+    bottom:12px !important;
+    width:auto !important;
+    justify-content:center !important;
+  }
+}

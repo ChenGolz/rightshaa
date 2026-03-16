@@ -2,7 +2,7 @@
 // PWA
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js");
+    navigator.serviceWorker.register("service-worker.js?v=26", { updateViaCache: "none" });
   });
 }
 
@@ -401,4 +401,24 @@ END:VCARD`;
       }
     );
   };
+});
+
+
+// v26: make floating breathe button more prominent
+document.addEventListener("DOMContentLoaded", () => {
+  const fb = document.getElementById("floatingBreathe");
+  if (fb) {
+    fb.classList.add("floating-breathe-pulse");
+    fb.innerHTML = "🫁 רגע של נשימה";
+  }
+});
+
+// v26: try to force refresh stale service-worker caches on upgrade
+document.addEventListener("DOMContentLoaded", async () => {
+  if ("serviceWorker" in navigator) {
+    try {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const reg of regs) reg.update();
+    } catch (e) {}
+  }
 });
