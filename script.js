@@ -422,3 +422,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (e) {}
   }
 });
+
+
+// v27 prioritize breathing entry point
+document.addEventListener("DOMContentLoaded", () => {
+  const fb = document.getElementById("floatingBreathe");
+  if (fb) {
+    fb.innerHTML = "🫁 רגע של נשימה";
+    fb.title = "מעבר ישיר לרגע של נשימה";
+  }
+});

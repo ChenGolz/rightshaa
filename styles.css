@@ -446,3 +446,79 @@ textarea{
     justify-content:center !important;
   }
 }
+
+
+/* v27 breathing first + softer support-focused layout */
+.calm-first-banner{
+  display:flex;
+  justify-content:center;
+  padding-bottom:12px;
+}
+.calm-first-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  background:linear-gradient(135deg,#76b892,#5b9c7c);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:0 10px 26px rgba(0,0,0,0.16);
+}
+.calm-first-btn:hover{
+  filter:brightness(1.03);
+}
+.breathe-priority{
+  border:1px solid rgba(118,184,146,0.28) !important;
+  box-shadow:
+    0 14px 36px rgba(0,0,0,0.15),
+    0 0 0 1px rgba(118,184,146,0.08) inset !important;
+}
+.breathe-pretty .section-note{
+  max-width:680px;
+  margin-right:auto;
+  margin-left:auto;
+}
+.breathe-panel{
+  padding:10px 0 4px;
+}
+.breathe-soft-text{
+  font-size:1.02rem;
+}
+.section-card h2{
+  letter-spacing:-0.01em;
+}
+.hero-subtitle{
+  max-width:760px !important;
+}
+.cards-grid .mini-card p,
+.cards-grid .mini-card li{
+  color:var(--text-soft);
+}
+#ongoingSupport .mini-card{
+  background:rgba(255,255,255,0.045) !important;
+}
+.floating-breathe{
+  z-index:120 !important;
+}
+@media (max-width:680px){
+  .calm-first-btn{
+    width:100%;
+  }
+}
+
+
+/* v28 focused orgs + Atufim eligibility */
+#officialResources .mini-card,
+#atufimEligibility .mini-card{
+  min-height: 100%;
+}
+#officialResources .cards-grid,
+#atufimEligibility .cards-grid{
+  align-items: stretch;
+}
+#atufimEligibility strong{
+  color:#fff;
+}
