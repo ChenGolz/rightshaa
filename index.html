@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=44" />
+  <link rel="manifest" href="manifest.json?v=45" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=44" />
+  <link rel="stylesheet" href="styles.css?v=45" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -27,6 +27,7 @@
 
       <div class="hero-actions">
         <a class="btn btn-primary btn-hero-main" href="#breatheSection">🫁 רגע של נשימה</a>
+        <a class="btn btn-secondary" href="#roleSelector">🧭 בחירת זכאויות</a>
         <a class="btn btn-secondary" href="#letters">✉️ פנייה מהירה</a>
         <a class="btn btn-secondary" href="#benefitsTracker">📋 זכויות וסיוע</a>
                 <a class="btn btn-secondary" href="#mapSection">🗺️ עזרה קרובה</a>
@@ -39,6 +40,8 @@
     <div class="container nav-shell">
       <div class="nav-links">
         <a href="#breatheSection">נשימה</a>
+        <a href="#roleSelector">בחירת זכאויות</a>
+        <a href="#matchedBenefits">הטבות רלוונטיות</a>
         <a href="#letters">פנייה מהירה</a>
         <a href="#benefitsTracker">זכויות וסיוע</a>
                 <a href="#documentsChecklist">מסמכים</a>
@@ -81,6 +84,29 @@
       </div>
     </section>
 
+
+
+    <section id="roleSelector" class="section-card">
+      <h2>התאמה אישית לפי קרבה</h2>
+      <p class="section-note">אפשר לבחור אפשרות אחת או כמה אפשרויות יחד. למשל: הורה שכול + אחות שכולה. האתר יציג למטה את כל ההטבות והגופים שיכולים להיות רלוונטיים לשילוב שבחרתם.</p>
+      <div class="cards-grid role-grid">
+        <label class="role-card"><input type="checkbox" class="role-check" value="parent"> <span>הורה שכול</span></label>
+        <label class="role-card"><input type="checkbox" class="role-check" value="sibling"> <span>אח/ות שכול/ה</span></label>
+        <label class="role-card"><input type="checkbox" class="role-check" value="partner"> <span>בן/בת זוג</span></label>
+        <label class="role-card"><input type="checkbox" class="role-check" value="child"> <span>ילד/ה / יתום/ה</span></label>
+        <label class="role-card"><input type="checkbox" class="role-check" value="grandparent"> <span>סב/סבתא</span></label>
+      </div>
+      <div class="actions-row">
+        <button class="btn btn-primary" id="showBenefitsBtn" type="button">הציגו הטבות רלוונטיות</button>
+        <button class="btn btn-secondary" id="clearRolesBtn" type="button">נקה בחירה</button>
+      </div>
+    </section>
+
+    <section id="matchedBenefits" class="section-card">
+      <h2>ההטבות והגופים הרלוונטיים עבורכם</h2>
+      <p class="section-note">כאן יופיעו הזכויות, ההטבות והארגונים שמתאימים לבחירה שלכם. אם בחרתם כמה קרבות, יוצגו כל האפשרויות יחד.</p>
+      <div id="matchedBenefitsOutput" class="cards-grid"></div>
+    </section>
 
     <section id="aidTypes" class="section-card">
       <h2>איזה סיוע אתם מחפשים עכשיו?</h2>
@@ -740,6 +766,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=44"></script>
+  <script src="script.js?v=45"></script>
 </body>
 </html>

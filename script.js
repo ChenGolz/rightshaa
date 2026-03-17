@@ -540,3 +540,146 @@ document.addEventListener("DOMContentLoaded", () => {
     closeModal();
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const benefitsData = [
+    {
+      title: "ביטוח לאומי — משפחות שכולות / נפגעי פעולות איבה",
+      desc: "הגוף הרשמי המרכזי למימוש זכויות, תגמולים, מענקים, טפסים ומידע למשפחות שכולות.",
+      roles: ["parent","sibling","partner","child","grandparent"],
+      tags: ["זכויות רשמיות","תגמולים","מענקים"],
+      link: "https://www.btl.gov.il/HaravotBarzel1/Mishpahot_HB/Pages/default.aspx"
+    },
+    {
+      title: "מענק סיוע 7.10",
+      desc: "עמוד ייעודי של ביטוח לאומי למענק סיוע, סל טיפול ושיקום ומסלולי סיוע רלוונטיים.",
+      roles: ["parent","sibling","partner","child"],
+      tags: ["מענק","7.10","סיוע"],
+      link: "https://www.btl.gov.il/HaravotBarzel1/MankSYOA7.10/Pages/default.aspx"
+    },
+    {
+      title: "עטופים באהבה",
+      desc: "ליווי ארוך טווח לילדים ובני נוער שאיבדו הורה ב־7.10, בהתאם לתנאי הזכאות של העמותה.",
+      roles: ["child"],
+      tags: ["יתומים","ליווי ארוך טווח","חוסן"],
+      link: "https://www.atufim.org/"
+    },
+    {
+      title: "חמניות",
+      desc: "תמיכה רגשית וחברתית לילדים ובני נוער שכולים.",
+      roles: ["child"],
+      tags: ["ילדים ונוער","תמיכה רגשית"],
+      link: "https://www.hamaniot.org/"
+    },
+    {
+      title: "אור למשפחות — מלגות לאחים ואחיות",
+      desc: "מלגות ללימודים אקדמיים לאחים ואחיות של הנופלים במערכות ישראל.",
+      roles: ["sibling"],
+      tags: ["מלגות","אחים ואחיות"],
+      link: "https://www.or4family.org.il/"
+    },
+    {
+      title: "יד לבנים — מידעון אחים ואחיות",
+      desc: "מידע מרוכז על תמיכות, זכויות והטבות לאחים ואחיות שכולים.",
+      roles: ["sibling"],
+      tags: ["מידעון","הטבות","אחים ואחיות"],
+      link: "https://yadlabanim.org/%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA-%D7%95%D7%94%D7%98%D7%91%D7%95%D7%AA/"
+    },
+    {
+      title: "כל זכות — סיוע בדיור להורים שכולים",
+      desc: "הסברים בשפה פשוטה על הלוואות, מענקים וסיוע בדיור להורים שכולים של חללי פעולות איבה.",
+      roles: ["parent"],
+      tags: ["דיור","הורים","כל זכות"],
+      link: "https://www.kolzchut.org.il/he/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA_%D7%95%D7%9E%D7%A2%D7%A0%D7%A7%D7%99%D7%9D_%D7%91%D7%AA%D7%97%D7%95%D7%9D_%D7%94%D7%93%D7%99%D7%95%D7%A8_%D7%9C%D7%94%D7%95%D7%A8%D7%99%D7%9D_%D7%A9%D7%9B%D7%95%D7%9C%D7%99%D7%9D_%D7%A9%D7%9C_%D7%97%D7%9C%D7%9C%D7%99_%D7%A4%D7%A2%D7%95%D7%9C%D7%AA_%D7%90%D7%99%D7%91%D7%94"
+    },
+    {
+      title: "משרד הביטחון — הורים שכולים",
+      desc: "מידע נוסף על זכויות, מענקים ותשלומים במקרים שבהם המסלול הזה רלוונטי.",
+      roles: ["parent"],
+      tags: ["הורים","משרד הביטחון"],
+      link: "https://mishpahot-hantzaha.mod.gov.il/benefits/parents"
+    },
+    {
+      title: "כל זכות — מענק נישואין ליתומים",
+      desc: "מידע על מענק נישואין ליתומים של חללי פעולת איבה.",
+      roles: ["child"],
+      tags: ["יתומים","נישואין","מענק"],
+      link: "https://www.kolzchut.org.il/he/%D7%9E%D7%A2%D7%A0%D7%A7_%D7%A0%D7%99%D7%A9%D7%95%D7%90%D7%99%D7%9F_%D7%9C%D7%99%D7%AA%D7%95%D7%9E%D7%99%D7%9D_%D7%A9%D7%9C_%D7%97%D7%9C%D7%9C%D7%99_%D7%A4%D7%A2%D7%95%D7%9C%D7%AA_%D7%90%D7%99%D7%91%D7%94"
+    },
+    {
+      title: "OneFamily",
+      desc: "סיוע רגשי, קהילתי, משפטי ולעיתים גם כלכלי למשפחות נפגעי טרור.",
+      roles: ["parent","sibling","partner","child"],
+      tags: ["קהילה","סיוע רגשי","ליווי"],
+      link: "https://onefamilytogether.org/he/"
+    },
+    {
+      title: "נט״ל",
+      desc: "טיפול בטראומה, חרדה ותמיכה רגשית לבני משפחה במעגלי השכול.",
+      roles: ["parent","sibling","partner","child","grandparent"],
+      tags: ["טראומה","תמיכה רגשית"],
+      link: "https://www.natal.org.il/"
+    },
+    {
+      title: "הסוכנות היהודית — מענק חירום",
+      desc: "סיוע בינלאומי ומענק חירום במקרים רלוונטיים.",
+      roles: ["parent","sibling","partner","child"],
+      tags: ["סיוע מחו״ל","מענק חירום"],
+      link: "https://fvot.jewishagency.org/immediate-support/"
+    },
+    {
+      title: "אור למשפחות — קהילה ותוכניות",
+      desc: "תוכניות חיזוק, קהילה, תוכן, מלגות ויוזמות למשפחות, הורים ואחים.",
+      roles: ["parent","sibling"],
+      tags: ["קהילה","תוכן","מלגות"],
+      link: "https://www.or4family.org.il/"
+    }
+  ];
+
+  const output = document.getElementById("matchedBenefitsOutput");
+  const checks = () => [...document.querySelectorAll(".role-check:checked")].map(el => el.value);
+
+  function renderMatchedBenefits() {
+    if (!output) return;
+    const selected = checks();
+    localStorage.setItem("selected_roles", JSON.stringify(selected));
+
+    if (!selected.length) {
+      output.innerHTML = '<div class="empty-state">בחרו אפשרות אחת או יותר כדי לראות הטבות וגופים רלוונטיים.</div>';
+      return;
+    }
+
+    const matches = benefitsData.filter(item => item.roles.some(role => selected.includes(role)));
+
+    output.innerHTML = matches.map(item => `
+      <article class="benefit-card">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+        <p><a href="${item.link}" target="_blank" rel="noopener noreferrer">למידע נוסף</a></p>
+        <div class="benefit-tags">
+          ${item.tags.map(tag => `<span class="benefit-tag">${tag}</span>`).join("")}
+        </div>
+      </article>
+    `).join("");
+  }
+
+  const saved = JSON.parse(localStorage.getItem("selected_roles") || "[]");
+  document.querySelectorAll(".role-check").forEach((cb) => {
+    if (saved.includes(cb.value)) cb.checked = true;
+    cb.addEventListener("change", renderMatchedBenefits);
+  });
+
+  document.getElementById("showBenefitsBtn")?.addEventListener("click", () => {
+    renderMatchedBenefits();
+    document.getElementById("matchedBenefits")?.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  document.getElementById("clearRolesBtn")?.addEventListener("click", () => {
+    document.querySelectorAll(".role-check").forEach((cb) => cb.checked = false);
+    localStorage.removeItem("selected_roles");
+    renderMatchedBenefits();
+  });
+
+  renderMatchedBenefits();
+});
