@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
+  <title>סיוע למשפחות שכולות שער הנגב</title>
   <meta name="theme-color" content="#4d8f73" />
-  <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=48" />
+  <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי האובדן." />
+  <link rel="manifest" href="manifest.json?v=49" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=48" />
+  <link rel="stylesheet" href="styles.css?v=49" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -79,7 +79,7 @@
           <span id="breatheInnerText">נשימה</span>
         </div>
         <div id="breatheStatus" class="breathe-status">מוכנים להתחיל</div>
-        <div class="actions-row center-row">
+        <div class="actions-row stepper-actions"><button class="btn btn-secondary" id="backToStep1Btn" type="button">חזרה</button><button class="btn btn-primary" id="toStep3Btn" type="button">הבא</button></div></div><div class="step-panel" data-step-panel="3"><div class="actions-row center-row">
           <button class="btn btn-primary" id="startBreathe" type="button">התחל/י נשימה</button>
           <button class="btn btn-secondary" id="stopBreathe" type="button">עצור/י נשימה</button>
         </div>
@@ -155,7 +155,7 @@
       <p class="section-note">אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי. הפרטים שמוזנים כאן אינם נשמרים באתר.</p>
 
       <form id="letterForm">
-        <div class="form-grid">
+        <div class="step-panel active" data-step-panel="1"><div class="form-grid">
           <label>שם מלא
             <input id="letterName" type="text" autocomplete="off">
           </label>
@@ -213,7 +213,7 @@
           </label>
         </div>
 
-        <p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר. אחרי לחיצה על פנייה מהירה, המכתב יתמלא אוטומטית לפי הגוף והנושא.</p>
+        </div><div class="actions-row stepper-actions"><button class="btn btn-primary" id="toStep2Btn" type="button">הבא</button></div></div><div class="step-panel" data-step-panel="2"><p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר. אחרי לחיצה על פנייה מהירה, המכתב יתמלא אוטומטית לפי הגוף והנושא.</p>
 
         <div class="actions-row">
           <button class="btn btn-primary" id="generateLetter" type="submit">צור מכתב</button>
@@ -223,35 +223,45 @@
           <button class="btn btn-secondary" id="sendLetterWhatsappBtn" type="button" disabled>שליחה ב‑WhatsApp</button>
           <button class="btn btn-secondary" id="clearDraftBtn" type="button">נקה מהדפדפן</button>
         </div>
-      </form>
+      </div></form>
 
       <textarea id="letterOutput" class="letter-output" placeholder="כאן יופיע נוסח הפנייה בפורמט מסודר וברור"></textarea>
     </section>
 
+    
     <section id="benefitsTracker" class="section-card">
-      <h2>זכויות וסיוע — מה לבדוק מול כל גוף</h2>
-      <p class="section-note">הסעיף הזה עוזר לסדר מה כדאי לבדוק מול הגוף הרלוונטי: טפסים, הכרה, טיפול רגשי, מסמכים, מענקים והמשך ליווי.</p>
-
-      <div class="form-grid two-col">
-        <label>מסלול
-          <select id="trackerTrack">
-            <option>ביטוח לאומי — נפגעי פעולות איבה</option>
-            <option>סיוע רגשי / מרכזי חוסן</option>
-          </select>
-        </label>
-        <label>תאריך האובדן / פתיחת התיק
-          <input id="trackerStart" type="date">
-          <small id="trackerStartError" class="field-error"></small>
-        </label>
+      <h2>זכויות וסיוע — לפי נושא</h2>
+      <p class="section-note">בחרו את סוג הסיוע שתרצו לראות כרגע, כדי להפחית עומס ולעבור ישר לנושא הרלוונטי.</p>
+      <div class="tabs-wrap">
+        <div class="tabs-row" role="tablist" aria-label="סוגי זכויות">
+          <button class="tab-btn active" type="button" data-tab="financialTab" role="tab" aria-selected="true">זכויות כספיות</button>
+          <button class="tab-btn" type="button" data-tab="emotionalTab" role="tab" aria-selected="false">סיוע נפשי</button>
+          <button class="tab-btn" type="button" data-tab="memorialTab" role="tab" aria-selected="false">הנצחה וקהילה</button>
+        </div>
+        <div class="tab-panel active" id="financialTab" role="tabpanel">
+          <div class="cards-grid">
+            <article class="mini-card"><h3>זכויות כספיות</h3><p>תגמולים, מענקים, החזרים, סיוע בדיור ובירור זכאות מול גופים רשמיים.</p></article>
+            <article class="mini-card"><h3>ביטוח לאומי</h3><p>הגוף המרכזי לבדיקת תגמולים, מענקים וזכויות רשמיות למשפחות שכולות.</p></article>
+            <article class="mini-card"><h3>מלגות והטבות</h3><p>מלגות לימודים, הטבות קהילה וליווי למשפחות, הורים ואחים.</p></article>
+          </div>
+        </div>
+        <div class="tab-panel" id="emotionalTab" role="tabpanel">
+          <div class="cards-grid">
+            <article class="mini-card"><h3>סיוע נפשי</h3><p>טיפול רגשי, קבוצות תמיכה, ייעוץ וליווי נפשי פרטני או משפחתי.</p></article>
+            <article class="mini-card"><h3>מרכזי חוסן ונט״ל</h3><p>תמיכה בטראומה, חרדה, אובדן והכוונה לגופי טיפול מתאימים.</p></article>
+            <article class="mini-card"><h3>ילדים ובני נוער</h3><p>ליווי ייעודי לילדים ובני נוער שכולים, כולל תמיכה מותאמת גיל.</p></article>
+          </div>
+        </div>
+        <div class="tab-panel" id="memorialTab" role="tabpanel">
+          <div class="cards-grid">
+            <article class="mini-card"><h3>הנצחה</h3><p>דרכי הנצחה, תוכן קהילתי, טקסים, זיכרון ותמיכה ציבורית.</p></article>
+            <article class="mini-card"><h3>קהילה</h3><p>תוכניות למשפחות, ימי קהילה, חיבור לגופים מלווים ופעילויות מחזקות.</p></article>
+            <article class="mini-card"><h3>יד לבנים</h3><p>זכויות, קהילה, זיכרון והנצחה לבני משפחה דרך הארגון.</p></article>
+          </div>
+        </div>
       </div>
-
-      <div class="actions-row">
-        <button class="btn btn-primary" id="buildTracker" type="button">בנה/י ציר זמן</button>
-        <button class="btn btn-secondary" id="clearTracker" type="button">נקה</button>
-      </div>
-
-      <div id="trackerOutput" class="timeline"></div>
     </section>
+
 
 
 
@@ -334,7 +344,7 @@
 
     <section id="officialResources" class="section-card">
       <h2>גורמי סיוע מרכזיים למשפחות 7.10</h2>
-      <p class="section-note">הגופים המרכזיים והרלוונטיים ביותר למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023.</p>
+      <p class="section-note">הגופים המרכזיים והרלוונטיים ביותר למשפחות שאיבדו את יקיריהן באירועי האובדן.</p>
 
       <div class="cards-grid">
         <article class="mini-card">
@@ -765,7 +775,7 @@
     <div class="container footer-grid">
       <div>
         <strong>מרכז סיוע למשפחות שכולות 7.10</strong>
-        <p>מיזם מידע והכוונה למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023.</p><p class="small-note">האתר אינו מחליף ייעוץ משפטי, רפואי או רשמי של ביטוח לאומי, משרד הביטחון או כל גוף מוסמך אחר.</p>
+        <p>מיזם מידע והכוונה למשפחות שאיבדו את יקיריהן באירועי האובדן.</p><p class="small-note">האתר אינו מחליף ייעוץ משפטי, רפואי או רשמי של ביטוח לאומי, משרד הביטחון או כל גוף מוסמך אחר.</p>
       </div>
       <div>
         <strong>שקיפות</strong>
@@ -785,6 +795,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=48"></script>
+  <script src="script.js?v=49"></script>
 </body>
 </html>

@@ -89,3 +89,10 @@
 - הוקטן עומס בחלק העליון במובייל
 - כפתורים, שדות וטפסים שופרו למסכים צרים
 - המפה, המודל והכפתור הצף שופרו למובייל
+
+
+## v49
+- Title updated to שער הנגב
+- Softer colors
+- Tabs added to benefits
+- Stepper added to letter form

@@ -1,7 +1,7 @@
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=48", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=49", { updateViaCache: "none" });
   });
 }
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lines.push("שלום רב,");
     lines.push("");
 
-    let subjectLine = "הנדון: פנייה בנושא זכויות וסיוע בעקבות אירועי 7 באוקטובר";
+    let subjectLine = "הנדון: פנייה בנושא זכויות וסיוע בעקבות האובדן";
     if (need.includes("נפשי")) subjectLine = "הנדון: בקשה לסיוע נפשי וליווי רגשי למשפחת שכול";
     if (need.includes("מלג")) subjectLine = "הנדון: הגשת מועמדות למלגת לימודים וסיוע אקדמי";
     if (need.includes("מענק")) subjectLine = "הנדון: בקשה למימוש זכויות כלכליות ומענקי סיוע";
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lines.push(subjectLine);
     lines.push("");
 
-    lines.push(`אני פונה אליכם כ${relation || "בן/בת משפחה"} של ${deceased || "יקירי"} ז"ל, אשר נפל/ה באירועי השבעה באוקטובר 2023.`);
+    lines.push(`אני פונה אליכם כ${relation || "בן/בת משפחה"} של ${deceased || "יקירי"} ז"ל, אשר נפל/ה באירועי האובדן.`);
     lines.push("");
 
     switch (true) {
@@ -830,4 +830,28 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll(".tab-btn").forEach((b) => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      document.querySelectorAll(".tab-panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === target);
+      });
+    });
+  });
+  const panels = [...document.querySelectorAll(".step-panel")];
+  const badges = [...document.querySelectorAll(".step-badge")];
+  function setStep(n){
+    panels.forEach((p,idx)=>p.classList.toggle("active", idx===n-1));
+    badges.forEach((b,idx)=>b.classList.toggle("active", idx===n-1));
+  }
+  document.getElementById("toStep2Btn")?.addEventListener("click", ()=>setStep(2));
+  document.getElementById("backToStep1Btn")?.addEventListener("click", ()=>setStep(1));
+  document.getElementById("toStep3Btn")?.addEventListener("click", ()=>setStep(3));
 });
