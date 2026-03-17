@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=41" />
+  <link rel="manifest" href="manifest.json?v=42" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=41" />
+  <link rel="stylesheet" href="styles.css?v=42" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -29,8 +29,7 @@
         <a class="btn btn-primary btn-hero-main" href="#breatheSection">🫁 רגע של נשימה</a>
         <a class="btn btn-secondary" href="#letters">✉️ פנייה מהירה</a>
         <a class="btn btn-secondary" href="#benefitsTracker">📋 זכויות וסיוע</a>
-        <a class="btn btn-secondary" href="#smartTimeline">📅 תאריכים חשובים</a>
-        <a class="btn btn-secondary" href="#mapSection">🗺️ עזרה קרובה</a>
+                <a class="btn btn-secondary" href="#mapSection">🗺️ עזרה קרובה</a>
         <a class="btn btn-accent" href="#help">📞 קבלו עזרה עכשיו</a>
       </div>
     </div>
@@ -42,11 +41,11 @@
         <a href="#breatheSection">נשימה</a>
         <a href="#letters">פנייה מהירה</a>
         <a href="#benefitsTracker">זכויות וסיוע</a>
-        <a href="#smartTimeline">תאריכים חשובים</a>
-        <a href="#documentsChecklist">מסמכים</a>
+                <a href="#documentsChecklist">מסמכים</a>
         <a href="#faqQuick">שאלות מהירות</a>
         <a href="#mapSection">מפה</a>
         <a href="#officialResources">גורמי סיוע</a>
+        <a href="#orgDirectory">מי נותן מה</a>
         <a href="#curatedLinks">קישורים חשובים</a>
         <a href="#scholarshipsBenefits">מלגות והטבות</a>
         <a href="#communityPrograms">קהילה ותוכן</a>
@@ -79,6 +78,47 @@
           <button class="btn btn-primary" id="startBreathe" type="button">התחל/י נשימה</button>
           <button class="btn btn-secondary" id="stopBreathe" type="button">עצור/י נשימה</button>
         </div>
+      </div>
+    </section>
+
+
+    <section id="aidTypes" class="section-card">
+      <h2>איזה סיוע אתם מחפשים עכשיו?</h2>
+      <p class="section-note">מטרת האתר היא לעזור להבין <strong>מי הגוף הרלוונטי</strong> ומה בדיוק הוא נותן. אפשר להתחיל מהצורך עצמו, ואז לעבור לארגון המתאים.</p>
+      <div class="cards-grid">
+        <article class="mini-card">
+          <h3>סיוע בזכויות, טפסים ומענקים</h3>
+          <ul class="guide-list compact-list">
+            <li><strong>ביטוח לאומי</strong> — תגמולים, טפסים, מענקי 7.10, מידע רשמי למשפחות שכולות</li>
+            <li><strong>כל זכות</strong> — הסברים פשוטים על זכויות, דיור, הבראה, מענקים ועוד</li>
+            <li><strong>עטופים באהבה</strong> — ליווי ארוך טווח ליתומים לפי קריטריוני הזכאות</li>
+          </ul>
+        </article>
+        <article class="mini-card">
+          <h3>סיוע רגשי ונפשי</h3>
+          <ul class="guide-list compact-list">
+            <li><strong>מרכזי חוסן</strong> — טיפול רגשי ראשוני והמשך ליווי</li>
+            <li><strong>נט״ל</strong> — טיפול בטראומה, חרדה וליווי רגשי</li>
+            <li><strong>OneFamily</strong> — תמיכה רגשית, קהילתית ולעיתים גם משפטית</li>
+            <li><strong>חמניות</strong> — תמיכה לילדים ובני נוער שכולים</li>
+          </ul>
+        </article>
+        <article class="mini-card">
+          <h3>ילדים, יתומים ומשפחה</h3>
+          <ul class="guide-list compact-list">
+            <li><strong>עטופים באהבה</strong> — יתומים מה־7.10 והמשך ליווי</li>
+            <li><strong>חמניות</strong> — מעגלי תמיכה לילדים ובני נוער</li>
+            <li><strong>אור למשפחות</strong> — קהילה, תוכניות, מלגות וחיבורים למשפחות</li>
+          </ul>
+        </article>
+        <article class="mini-card">
+          <h3>מלגות, הטבות וקהילה</h3>
+          <ul class="guide-list compact-list">
+            <li><strong>אור למשפחות</strong> — מלגות ותוכניות קהילתיות</li>
+            <li><strong>יד לבנים</strong> — מידעון, מלגות, מועדון הטבות וזכויות</li>
+            <li><strong>הסוכנות היהודית</strong> — מענק חירום וסיוע בינלאומי במקרים רלוונטיים</li>
+          </ul>
+        </article>
       </div>
     </section>
 
@@ -151,8 +191,8 @@
     </section>
 
     <section id="benefitsTracker" class="section-card">
-      <h2>זכויות וסיוע</h2>
-      <p class="section-note">ריכזנו כאן תזכורות ושאלות שכדאי לבדוק: פתיחת תיק, טפסים, המשך ליווי רגשי, וטיפול בילדים ובנוער.</p>
+      <h2>זכויות וסיוע — מה לבדוק מול כל גוף</h2>
+      <p class="section-note">הסעיף הזה עוזר לסדר מה כדאי לבדוק מול הגוף הרלוונטי: טפסים, הכרה, טיפול רגשי, מסמכים, מענקים והמשך ליווי.</p>
 
       <div class="form-grid two-col">
         <label>מסלול
@@ -175,26 +215,6 @@
       <div id="trackerOutput" class="timeline"></div>
     </section>
 
-    <section id="smartTimeline" class="section-card">
-      <h2>תאריכים חשובים</h2>
-      <p class="section-note">בחרו תאריך אובדן, והמערכת תחשב עבורכם סיום שבעה, שלושים ואזכרת שנה.</p>
-
-      <div class="form-grid two-col">
-        <label>תאריך הפטירה / האובדן
-          <input id="smartDeathDate" type="date">
-          <small id="smartDeathDateError" class="field-error"></small>
-        </label>
-      </div>
-
-      <div class="actions-row">
-        <button class="btn btn-primary" id="buildSmartTimeline" type="button">חשב/י תאריכים</button>
-        <button class="btn btn-secondary" id="clearSmartTimeline" type="button">נקה</button>
-        <button class="btn btn-secondary" id="addMemorialCalendarBtn" type="button">הוסף אזכרת שנה ליומן</button>
-      </div>
-
-      <div id="smartTimelineOutput" class="timeline"></div>
-      <div class="section-note">זהו כלי עזר בלבד. לתאריכים הלכתיים או רשמיים יש לאמת מול הגורם המתאים.</div>
-    </section>
 
 
     <section id="documentsChecklist" class="section-card">
@@ -328,6 +348,44 @@
       </div>
     
 </section>
+
+
+    <section id="orgDirectory" class="section-card">
+      <h2>מדריך הארגונים — מי נותן מה</h2>
+      <p class="section-note">כאן ריכזנו את הארגונים והגופים המרכזיים לפי <strong>מה הם נותנים</strong>, כדי שיהיה קל להבין למי כדאי לפנות קודם.</p>
+      <div class="cards-grid">
+        <article class="mini-card">
+          <h3>ביטוח לאומי</h3>
+          <p><strong>מה נותן:</strong> הכרה רשמית, תגמולים, מענקים, טפסים, מידע למשפחות שכולות, מענק 7.10 ומסלולי סיוע נוספים.</p>
+          <p><strong>מתי לפנות:</strong> כמעט תמיד זה הגוף הראשון לבדיקה כשמדובר במשפחה שכולה אזרחית מאירועי 7.10.</p>
+        </article>
+        <article class="mini-card">
+          <h3>מרכזי חוסן</h3>
+          <p><strong>מה נותנים:</strong> טיפול רגשי, תמיכה נפשית, מענה ראשוני והכוונה להמשך טיפול.</p>
+          <p><strong>מתי לפנות:</strong> כשיש צורך דחוף או מתמשך בתמיכה רגשית, לילדים, הורים, אחים ובני משפחה.</p>
+        </article>
+        <article class="mini-card">
+          <h3>עטופים באהבה</h3>
+          <p><strong>מה נותנים:</strong> ליווי ארוך טווח, חוסן, שיקום ותמיכה לילדים ובני נוער שהתייתמו ב־7.10 לפי הקריטריונים של העמותה.</p>
+          <p><strong>למי מתאים:</strong> בעיקר ליתומים ולמשפחות עם ילדים צעירים או צעירים בוגרים שעומדים בתנאי הזכאות.</p>
+        </article>
+        <article class="mini-card">
+          <h3>חמניות</h3>
+          <p><strong>מה נותנות:</strong> תמיכה חברתית־רגשית לילדים ובני נוער שכולים.</p>
+          <p><strong>מתי לפנות:</strong> כשמחפשים קהילה, שייכות ותמיכה לילדים או למתבגרים.</p>
+        </article>
+        <article class="mini-card">
+          <h3>OneFamily</h3>
+          <p><strong>מה נותנים:</strong> סיוע רגשי, קהילתי, משפטי ולעיתים גם כלכלי לנפגעי טרור ולמשפחותיהם.</p>
+          <p><strong>מתי לפנות:</strong> כשצריך מעטפת רחבה יותר מעבר לזכויות הרשמיות.</p>
+        </article>
+        <article class="mini-card">
+          <h3>אור למשפחות / יד לבנים</h3>
+          <p><strong>מה נותנים:</strong> קהילה, תוכניות תמיכה, מלגות, הטבות, תוכן וחיזוק למשפחות, הורים ואחים.</p>
+          <p><strong>מתי לפנות:</strong> כשמחפשים לא רק זכויות, אלא גם חיבוק קהילתי, פעילות, מלגות והטבות.</p>
+        </article>
+      </div>
+    </section>
 
     <section id="curatedLinks" class="section-card">
       <h2>קישורים חשובים ומומלצים בלבד</h2>
@@ -682,6 +740,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=41"></script>
+  <script src="script.js?v=42"></script>
 </body>
 </html>

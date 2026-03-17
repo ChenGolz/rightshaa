@@ -1,7 +1,7 @@
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=41", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=42", { updateViaCache: "none" });
   });
 }
 
@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const letterPhone = $("letterPhone");
   const letterEmail = $("letterEmail");
   const letterOutput = $("letterOutput");
-  const smartDeathDate = $("smartDeathDate");
-  const smartTimelineOutput = $("smartTimelineOutput");
+
   const trackerStart = $("trackerStart");
   const trackerOutput = $("trackerOutput");
 
@@ -211,81 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
-  function calculateDates(dateValue) {
-    const d = new Date(dateValue);
-    const shiva = new Date(d); shiva.setDate(d.getDate() + 7);
-    const shloshim = new Date(d); shloshim.setDate(d.getDate() + 30);
-    const elevenMonths = new Date(d); elevenMonths.setMonth(d.getMonth() + 11);
-    const year = new Date(d); year.setFullYear(d.getFullYear() + 1);
-    return { shiva, shloshim, elevenMonths, year };
+  }
+);
   }
 
-  function renderSmartTimeline(value) {
-    const dates = calculateDates(value);
-    if (smartTimelineOutput) {
-      smartTimelineOutput.innerHTML = `
-        <div class="timeline-item"><strong>סיום השבעה:</strong> ${dates.shiva.toLocaleDateString("he-IL")}</div>
-        <div class="timeline-item"><strong>שלושים:</strong> ${dates.shloshim.toLocaleDateString("he-IL")}</div>
-        <div class="timeline-item"><strong>י״א חודש:</strong> ${dates.elevenMonths.toLocaleDateString("he-IL")}</div>
-        <div class="timeline-item"><strong>אזכרת שנה:</strong> ${dates.year.toLocaleDateString("he-IL")}</div>
-      `;
-    }
-  }
-
-  if (letterDate) {
-    letterDate.addEventListener("input", () => {
-      setError("letterDate", isFutureDate(letterDate.value) ? "נא להזין תאריך מהעבר." : "");
-    });
-    letterDate.addEventListener("change", () => {
-      if (letterDate.value && !isFutureDate(letterDate.value) && smartDeathDate) {
-        smartDeathDate.value = letterDate.value;
-        renderSmartTimeline(letterDate.value);
-      }
-    });
-  }
-
-  const buildSmartTimelineBtn = $("buildSmartTimeline");
-  if (buildSmartTimelineBtn) buildSmartTimelineBtn.onclick = () => {
-    setError("smartDeathDate", "");
-    if (!smartDeathDate?.value) {
-      setError("smartDeathDate", "נא להזין תאריך.");
-      return;
-    }
-    if (isFutureDate(smartDeathDate.value)) {
-      setError("smartDeathDate", "נא להזין תאריך מהעבר.");
-      return;
-    }
-    renderSmartTimeline(smartDeathDate.value);
-  };
-
-  const clearSmartTimelineBtn = $("clearSmartTimeline");
-  if (clearSmartTimelineBtn) clearSmartTimelineBtn.onclick = () => {
-    if (smartDeathDate) smartDeathDate.value = "";
-    if (smartTimelineOutput) smartTimelineOutput.innerHTML = "";
-    setError("smartDeathDate", "");
-  };
-
-  const addMemorialCalendarBtn = $("addMemorialCalendarBtn");
-  if (addMemorialCalendarBtn) addMemorialCalendarBtn.onclick = () => {
-    const sourceDate = smartDeathDate?.value || letterDate?.value;
-    setError("smartDeathDate", "");
-    if (!sourceDate) {
-      setError("smartDeathDate", "נא להזין תאריך קודם.");
-      return;
-    }
-    if (isFutureDate(sourceDate)) {
-      setError("smartDeathDate", "נא להזין תאריך מהעבר.");
-      return;
-    }
-    const memorialDate = new Date(sourceDate);
-    memorialDate.setFullYear(memorialDate.getFullYear() + 1);
-    const endDate = new Date(memorialDate);
-    endDate.setHours(endDate.getHours() + 1);
-    const start = memorialDate.toISOString().replace(/[-:]|\.\d{3}/g, "").slice(0,15) + "Z";
-    const end = endDate.toISOString().replace(/[-:]|\.\d{3}/g, "").slice(0,15) + "Z";
-    const title = encodeURIComponent("אזכרת שנה ליקירנו");
-    window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}`, "_blank");
-  };
 
   const buildTrackerBtn = $("buildTracker");
   if (buildTrackerBtn) buildTrackerBtn.onclick = () => {
