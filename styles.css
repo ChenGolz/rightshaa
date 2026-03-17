@@ -287,3 +287,67 @@ input,select,textarea{font-size:16px}
 #orgDirectory .mini-card{
   min-height:100%;
 }
+
+
+/* v43 - improved combo box / select appearance */
+label select,
+select{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #24425f;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.18);
+  background-image:
+    linear-gradient(45deg, transparent 50%, #dfeeff 50%),
+    linear-gradient(135deg, #dfeeff 50%, transparent 50%);
+  background-position:
+    calc(16px) calc(50% - 3px),
+    calc(9px) calc(50% - 3px);
+  background-size: 7px 7px, 7px 7px;
+  background-repeat: no-repeat;
+  padding-left: 34px;
+}
+
+label select:hover,
+select:hover{
+  background-color: #2b4d6d;
+  border-color: rgba(255,255,255,0.3);
+}
+
+label select:focus,
+select:focus{
+  outline: none;
+  border-color: #ffda6b;
+  box-shadow: 0 0 0 3px rgba(255,218,107,0.18);
+}
+
+select option{
+  background: #ffffff;
+  color: #17324c;
+}
+
+select option:checked,
+select option:hover{
+  background: #dbeaf7;
+  color: #17324c;
+}
+
+@supports selector(select:open) {
+  select:open{
+    background-color: #2b4d6d;
+  }
+}
+
+.letter-output,
+textarea{
+  line-height: 1.9;
+}
+
+@media (max-width: 680px){
+  label select,
+  select{
+    min-height: 54px;
+    font-size: 16px;
+  }
+}
