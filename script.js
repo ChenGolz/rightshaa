@@ -6,21 +6,9 @@ if ("serviceWorker" in navigator) {
 }
 
 const mapPoints = [
-  {name:"מרכז חוסן — אופקים", type:"מרכז חוסן", lat:31.315, lng:34.621, address:"רח' קיבוץ גלויות 57, אופקים"},
-  {name:"אמ״ן — אזור מערב הנגב (נתיבות)", type:"מרכז חוסן", lat:31.423, lng:34.589, address:"חר״ש 76, נתיבות"},
-  {name:"אשכול (מגן)", type:"מרכז חוסן", lat:31.301, lng:34.429, address:"מגן"},
-  {name:"מרכז חוסן — אשקלון", type:"מרכז חוסן", lat:31.669, lng:34.571, address:"רח' צה״ל 99, בניין אביאל, אשקלון"},
-  {name:"בנימין (כוכב יעקב)", type:"מרכז חוסן", lat:31.880, lng:35.245, address:"אזור תעשיה שער בנימין, רחוב האומן, כוכב יעקב"},
-  {name:"גליל מזרחי (קרית שמונה)", type:"מרכז חוסן", lat:33.207, lng:35.570, address:"מרכז העסקים צומת כוח, אשכול גליל מזרחי, קרית שמונה"},
-  {name:"גליל מערבי (כברי)", type:"מרכז חוסן", lat:33.016, lng:35.095, address:"כברי"},
-  {name:"חברה בדואית (באר שבע)", type:"מרכז חוסן", lat:31.251, lng:34.791, address:"רח' שז״ר זלמן 35, בית נועם, באר שבע"},
-  {name:"חוף אשקלון (בת הדר)", type:"מרכז חוסן", lat:31.625, lng:34.612, address:"בת הדר"},
-  {name:"הודה (קרית ארבע)", type:"מרכז חוסן", lat:31.535, lng:35.111, address:"קרית ארבע"},
-  {name:"עציון (אפרת)", type:"מרכז חוסן", lat:31.655, lng:35.148, address:"רח' בועז 1, אפרת"},
-  {name:"שדות נגב (מעגלים)", type:"מרכז חוסן", lat:31.411, lng:34.603, address:"מועצה אזורית שדות נגב, מעגלים"},
-  {name:"שדרות", type:"מרכז חוסן", lat:31.523, lng:34.596, address:"רח' הרצל 68, שדרות"},
-  {name:"שומרון (קרני שומרון)", type:"מרכז חוסן", lat:32.170, lng:35.098, address:"קרני שומרון"},
-  {name:"שער הנגב (ספיר)", type:"מרכז חוסן", lat:31.557, lng:34.595, address:"ספיר"},
+  {name:"מרכז חוסן — אופקים", type:"מרכז חוסן", lat:31.315, lng:34.621, address:"קיבוץ גלויות 57, אופקים"},
+  {name:"מרכז חוסן — נתיבות", type:"מרכז חוסן", lat:31.423, lng:34.589, address:"חר״ש 76, נתיבות"},
+  {name:"מרכז חוסן — אשקלון", type:"מרכז חוסן", lat:31.669, lng:34.571, address:"צה״ל 99, אשקלון"},
   {name:"ביטוח לאומי — ירושלים", type:"ביטוח לאומי", lat:31.778, lng:35.221, address:"בן שטח 4, ירושלים"}
 ];
 
@@ -113,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return lines.join("\\n");
   }
 
-  $("generateLetter").onclick = () => {
+  const generateLetterBtn = $("generateLetter");
+  if (generateLetterBtn) generateLetterBtn.onclick = () => {
     setError("letterDate", "");
     if (isFutureDate(letterDate.value)) {
       setError("letterDate", "נא להזין תאריך מהעבר.");
@@ -122,7 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
     letterOutput.value = buildLetterText();
   };
 
-  $("copyLetter").onclick = async () => {
+  const copyLetterBtn = $("copyLetter");
+  if (copyLetterBtn) copyLetterBtn.onclick = async () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
     await navigator.clipboard.writeText(letterOutput.value);
     const old = $("copyLetter").textContent;
@@ -146,10 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
     }).from(wrapper).save();
   }
-  $("downloadPdfBtn").onclick = downloadPdf;
-  $("downloadPdfTop").onclick = downloadPdf;
+  const downloadPdfBtn = $("downloadPdfBtn");
+  const downloadPdfTop = $("downloadPdfTop");
+  if (downloadPdfBtn) downloadPdfBtn.onclick = downloadPdf;
+  if (downloadPdfTop) downloadPdfTop.onclick = downloadPdf;
 
-  $("generateMailBtn").onclick = () => {
+  const generateMailBtn = $("generateMailBtn");
+  if (generateMailBtn) generateMailBtn.onclick = () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
     const subject = encodeURIComponent("פנייה בנושא זכויות וסיוע למשפחת 7.10");
     const body = encodeURIComponent(letterOutput.value || "");
@@ -187,7 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  $("buildSmartTimeline").onclick = () => {
+  const buildSmartTimelineBtn = $("buildSmartTimeline");
+  if (buildSmartTimelineBtn) buildSmartTimelineBtn.onclick = () => {
     setError("smartDeathDate", "");
     if (!smartDeathDate.value) {
       setError("smartDeathDate", "נא להזין תאריך.");
@@ -200,13 +194,15 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSmartTimeline(smartDeathDate.value);
   };
 
-  $("clearSmartTimeline").onclick = () => {
+  const clearSmartTimelineBtn = $("clearSmartTimeline");
+  if (clearSmartTimelineBtn) clearSmartTimelineBtn.onclick = () => {
     smartDeathDate.value = "";
     smartTimelineOutput.innerHTML = "";
     setError("smartDeathDate", "");
   };
 
-  $("addMemorialCalendarBtn").onclick = () => {
+  const addMemorialCalendarBtn = $("addMemorialCalendarBtn");
+  if (addMemorialCalendarBtn) addMemorialCalendarBtn.onclick = () => {
     const sourceDate = smartDeathDate.value || letterDate.value;
     setError("smartDeathDate", "");
     if (!sourceDate) {
@@ -227,7 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}`, "_blank");
   };
 
-  $("buildTracker").onclick = () => {
+  const buildTrackerBtn = $("buildTracker");
+  if (buildTrackerBtn) buildTrackerBtn.onclick = () => {
     setError("trackerStart", "");
     if (!trackerStart.value) {
       setError("trackerStart", "נא להזין תאריך התחלה.");
@@ -261,19 +258,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  $("clearTracker").onclick = () => {
+  const clearTrackerBtn = $("clearTracker");
+  if (clearTrackerBtn) clearTrackerBtn.onclick = () => {
     trackerStart.value = "";
     trackerOutput.innerHTML = "";
     setError("trackerStart", "");
   };
 
-  $("shareSiteBtn").onclick = () => {
+  const shareSiteBtn = $("shareSiteBtn");
+  if (shareSiteBtn) shareSiteBtn.onclick = () => {
     const url = window.location.href;
     const text = encodeURIComponent("מצאתי אתר שעוזר למשפחות שכולות מאירועי 7.10 להתמודד עם זכויות, בירוקרטיה ותמיכה: " + url);
     window.open("https://wa.me/?text=" + text, "_blank");
   };
 
-  $("floatingBreathe").onclick = () => {
+  const floatingBreatheBtn = $("floatingBreathe");
+  if (floatingBreatheBtn) floatingBreatheBtn.onclick = () => {
     $("breatheSection").scrollIntoView({behavior:"smooth"});
   };
 
@@ -291,7 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
     breatheStatus.textContent = "מוכנים להתחיל";
   }
 
-  $("startBreathe").onclick = () => {
+  const startBreatheBtn = $("startBreathe");
+  if (startBreatheBtn) startBreatheBtn.onclick = () => {
     stopBreathing();
     let i = 0;
     let rounds = 4;
@@ -312,7 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
     breatheInterval = setInterval(nextPhase, 4000);
   };
 
-  $("stopBreathe").onclick = stopBreathing;
+  const stopBreatheBtn = $("stopBreathe");
+  if (stopBreatheBtn) stopBreatheBtn.onclick = stopBreathing;
 
   function downloadVCard(name, phone){
     const vcard = `BEGIN:VCARD
@@ -333,7 +335,8 @@ END:VCARD`;
     btn.addEventListener("click", () => downloadVCard(btn.dataset.name, btn.dataset.phone));
   });
 
-  $("askAiBtn").onclick = () => {
+  const askAiBtn = $("askAiBtn");
+  if (askAiBtn) askAiBtn.onclick = () => {
     const q = ($("aiQuestion").value || "").toLowerCase().trim();
     const aiAnswer = $("aiAnswer");
     if (!q) {
@@ -354,17 +357,21 @@ END:VCARD`;
     aiAnswer.innerHTML = `<div class="timeline-item">${answer}</div>`;
   };
 
-  const map = L.map("helpMap").setView([31.55, 34.75], 8);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  const helpMapEl = $("helpMap");
+  let map = null;
+  if (helpMapEl && window.L) {
+    map = L.map("helpMap").setView([31.55, 34.75], 8);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution: "&copy; OpenStreetMap"
-  }).addTo(map);
+    }).addTo(map);
 
-  mapPoints.forEach((p) => {
+    mapPoints.forEach((p) => {
     L.marker([p.lat, p.lng]).addTo(map).bindPopup(
       `<strong>${p.name}</strong><br>${p.type}<br>${p.address}<br><small>מיקום להמחשה.</small>`
     );
-  });
+    });
+  }
 
   function haversineKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
@@ -377,7 +384,8 @@ END:VCARD`;
     return 2 * R * Math.asin(Math.sqrt(a));
   }
 
-  $("locateMeBtn").onclick = () => {
+  const locateMeBtn = $("locateMeBtn");
+  if (locateMeBtn) locateMeBtn.onclick = () => {
     const btn = $("locateMeBtn");
     const mapStatus = $("mapStatus");
     const defaultLabel = "מצא מרכז קרוב אליי";
@@ -395,8 +403,10 @@ END:VCARD`;
       (pos) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
-        map.setView([userLat, userLng], 10);
-        L.marker([userLat, userLng]).addTo(map).bindPopup("המיקום שלי");
+        if (map) {
+          map.setView([userLat, userLng], 10);
+          L.marker([userLat, userLng]).addTo(map).bindPopup("המיקום שלי");
+        }
 
         const nearest = mapPoints
           .map((p) => ({...p, distance: haversineKm(userLat, userLng, p.lat, p.lng)}))

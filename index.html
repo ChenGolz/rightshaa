@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=31" />
+  <link rel="manifest" href="manifest.json?v=33" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=31" />
+  <link rel="stylesheet" href="styles.css?v=33" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -187,7 +187,7 @@
 
     <section id="mapSection" class="section-card">
       <h2>עזרה קרובה אליי</h2>
-      <p class="section-note">מפה חלקית של מוקדי סיוע רלוונטיים: מרכזי חוסן וביטוח לאומי. מתחת למפה הוספנו גם רשימה מורחבת של מוקדים, טלפונים וכתובות כפי שנמסרו, כדי שיהיה קל יותר למצוא קשר ישיר גם בלי להשתמש במפה.</p>
+      <p class="section-note">מפה חלקית של מוקדי סיוע רלוונטיים: מרכזי חוסן וביטוח לאומי. המפה עדיין חלקית ולכן הוספנו גם קישורים רשמיים לרשימות המלאות.</p>
 
       <div class="actions-row">
         <button class="btn btn-primary" id="locateMeBtn">מצא מרכז קרוב אליי</button>
@@ -196,31 +196,29 @@
 
       <div id="helpMap" class="map-box" aria-label="מפת מוקדי סיוע"></div>
 
-      
-      <div class="cards-grid address-grid support-centers-grid">
-        <article class="mini-card"><h3>אופקים</h3><p><strong>כתובת:</strong> רח' קיבוץ גלויות 57, אופקים<br><strong>טלפון:</strong> 08-9928438<br><strong>טלפון נוסף:</strong> 054-8220057<br><strong>דוא״ל:</strong> Hosenofakim@gmail.com<br><strong>הערות:</strong> מוקד עירוני 106</p></article>
-        <article class="mini-card"><h3>אמ״ן — אזור מערב הנגב (נתיבות)</h3><p><strong>כתובת:</strong> חר״ש 76, נתיבות<br><strong>טלפון:</strong> 055-3063863<br><strong>שירות לתושבים:</strong> אשבול, נתיבות, שובל, משמר הנגב, נבטים, חצרים, קלחים, בית קמה ועוד</p></article>
-        <article class="mini-card"><h3>אשכול (מגן)</h3><p><strong>טלפון:</strong> 08-9965264<br><strong>טלפון נוסף:</strong> 054-4819859<br><strong>שירות לתושבים:</strong> ניר עוז, בארי, נירים, כיסופים, כרם שלום, חולית, סופה, יבול ועוד</p></article>
-        <article class="mini-card"><h3>אשקלון</h3><p><strong>כתובת:</strong> רח' צה״ל 99, בניין אביאל, אשקלון<br><strong>טלפון:</strong> *2452<br><strong>דוא״ל:</strong> hosen.ashkelon@itc-office.org.il</p></article>
-        <article class="mini-card"><h3>בנימין (כוכב יעקב)</h3><p><strong>כתובת:</strong> אזור תעשיה שער בנימין, רחוב האומן, כוכב יעקב<br><strong>טלפון:</strong> 02-5848600<br><strong>דוא״ל:</strong> hosen@binyamin.org.il</p></article>
-        <article class="mini-card"><h3>גליל מזרחי (קרית שמונה)</h3><p><strong>כתובת:</strong> מרכז העסקים צומת כוח, אשכול גליל מזרחי, קרית שמונה<br><strong>טלפון:</strong> 04-7702647<br><strong>מוקד טיפולי:</strong> עברית 04-6900603 · אנגלית 04-7702651 · ערבית 04-7702649 · רוסית 04-7702650</p></article>
-        <article class="mini-card"><h3>גליל מערבי (כברי)</h3><p><strong>טלפון:</strong> 04-7702647<br><strong>מוקד טיפולי:</strong> עברית 04-6900603 · אנגלית 04-7702651 · ערבית 04-7702649 · רוסית 04-7702650</p></article>
-        <article class="mini-card"><h3>המרכז הארצי לטיפול בנפגעי חרדה</h3><p><strong>טלפון:</strong> *5486<br><strong>הערות:</strong> נותן שירות לתושבי רשויות וישובים שלא משויכים למרכז חוסן ייעודי</p></article>
-        <article class="mini-card"><h3>חברה בדואית (באר שבע)</h3><p><strong>כתובת:</strong> רח' שז״ר זלמן 35, בית נועם, באר שבע<br><strong>טלפון:</strong> 072-2212788<br><strong>דוא״ל:</strong> nhb@itc-office.org.il</p></article>
-        <article class="mini-card"><h3>חוף אשקלון (בת הדר)</h3><p><strong>טלפון:</strong> 08-6775598<br><strong>קו חם:</strong> 08-6576728</p></article>
-        <article class="mini-card"><h3>הודה (קרית ארבע)</h3><p><strong>טלפון:</strong> 02-9969560<br><strong>טלפון נוסף:</strong> 055-9534177</p></article>
-        <article class="mini-card"><h3>עציון (אפרת)</h3><p><strong>כתובת:</strong> רח' בועז 1, אפרת<br><strong>טלפון:</strong> 058-3989550<br><strong>דוא״ל:</strong> mhetzion1@itc-office.org.il</p></article>
-        <article class="mini-card"><h3>שדות נגב (מעגלים)</h3><p><strong>כתובת:</strong> מועצה אזורית שדות נגב, מעגלים<br><strong>טלפון:</strong> 08-9941091<br><strong>טלפון נוסף:</strong> 076-5322041<br><strong>דוא״ל:</strong> hosen2@sn.matnasim.co.il<br><a href="https://www.sdotnegev.org.il/forms/?category=25" target="_blank" rel="noopener noreferrer">טופס פנייה לטיפול</a></p></article>
-        <article class="mini-card"><h3>שדרות</h3><p><strong>כתובת:</strong> רח' הרצל 68, שדרות<br><strong>טלפון:</strong> 08-6611150<br><strong>טלפון נוסף:</strong> 08-6611140<br><strong>דוא״ל:</strong> hosen@gvanim.org.il</p></article>
-        <article class="mini-card"><h3>שומרון (קרני שומרון)</h3><p><strong>טלפון:</strong> 055-2779285<br><strong>דוא״ל:</strong> mmhsh@itc-office.org.il</p></article>
-        <article class="mini-card"><h3>שער הנגב (ספיר)</h3><p><strong>טלפון:</strong> 077-9802755<br><strong>טלפון נוסף:</strong> 052-6122141<br><strong>דוא״ל:</strong> hosen@sng.org.il</p></article>
+      <div class="cards-grid address-grid">
+        <article class="mini-card">
+          <h3>מרכז חוסן — אופקים</h3>
+          <p>קיבוץ גלויות 57, אופקים</p>
+        </article>
+        <article class="mini-card">
+          <h3>מרכז חוסן — נתיבות</h3>
+          <p>חר״ש 76, נתיבות</p>
+        </article>
+        <article class="mini-card">
+          <h3>מרכז חוסן — אשקלון</h3>
+          <p>צה״ל 99, אשקלון</p>
+        </article>
+        <article class="mini-card">
+          <h3>ביטוח לאומי — ירושלים</h3>
+          <p>בן שטח 4, ירושלים</p>
+        </article>
       </div>
 
-
       <p class="section-note">קישורים רשמיים:
-        <a href="https://www.gov.il/he/departments/dynamiccollectors/resilience-centers-list" target="_blank" rel="noopener noreferrer">רשימת מרכזי חוסן</a> ·
-        <a href="https://www.btl.gov.il/snifim/Pages/default.aspx" target="_blank" rel="noopener noreferrer">סניפי ביטוח לאומי</a> ·
-        <a href="https://www.btl.gov.il/English%20Homepage/Benefits/Benefits%20for%20Victims%20of%20Hostilities/Pages/List-of-Resilience-Centers.aspx" target="_blank" rel="noopener noreferrer">מרכזי חוסן וקליניקות</a>
+        <a href="https://www.gov.il/he/departments/dynamiccollectors/resilience-centers-list" target="_blank" rel="noopener">רשימת מרכזי חוסן</a> ·
+        <a href="https://www.btl.gov.il/snifim/Pages/default.aspx" target="_blank" rel="noopener">סניפי ביטוח לאומי</a> ·
+        <a href="https://www.btl.gov.il/English%20Homepage/Benefits/Benefits%20for%20Victims%20of%20Hostilities/Pages/List-of-Resilience-Centers.aspx" target="_blank" rel="noopener">מרכזי חוסן וקליניקות</a>
       </p>
     </section>
 
@@ -232,55 +230,55 @@
         <article class="mini-card">
           <h3>ביטוח לאומי — משפחות שכולות / נפגעי פעולות איבה</h3>
           <p>הגוף הרשמי המרכזי למימוש זכויות, קצבאות, טפסים, טיפול רגשי, מענקי סיוע ואוגדן זכויות למשפחות השכולות.</p>
-          <p><a href="https://www.btl.gov.il/HaravotBarzel1/Mishpahot_HB/Pages/default.aspx" target="_blank" rel="noopener noreferrer">מידע שימושי למשפחות השכולות</a></p>
+          <p><a href="https://www.btl.gov.il/HaravotBarzel1/Mishpahot_HB/Pages/default.aspx" target="_blank" rel="noopener">מידע שימושי למשפחות השכולות</a></p>
         </article>
 
         <article class="mini-card">
           <h3>טופס 582 — תביעה למשפחות</h3>
           <p>טופס התביעה הרשמי עבור משפחות של מי שנהרגו בפעולות איבה.</p>
-          <p><a href="https://www.btl.gov.il/English%20Homepage/About/Forms%20Authorization/Forms/Victims%20of%20Hostilities/Pages/582%20-%20Claim%20for%20Compensation%20for%20the%20Families%20of%20Those%20Killed%20in%20Terrorist%20Acts%28Hebrew%29.aspx" target="_blank" rel="noopener noreferrer">לטופס הרשמי</a></p>
+          <p><a href="https://www.btl.gov.il/English%20Homepage/About/Forms%20Authorization/Forms/Victims%20of%20Hostilities/Pages/582%20-%20Claim%20for%20Compensation%20for%20the%20Families%20of%20Those%20Killed%20in%20Terrorist%20Acts%28Hebrew%29.aspx" target="_blank" rel="noopener">לטופס הרשמי</a></p>
         </article>
 
         <article class="mini-card">
           <h3>עטופים באהבה</h3>
           <p>עמותה ייעודית לילדים ובני נוער שאיבדו הורה אחד או שניים ב־7 באוקטובר, עם תמיכה ארוכת טווח, חוסן, שיקום וליווי.</p>
-          <p><a href="https://www.atufim.org/" target="_blank" rel="noopener noreferrer">לאתר עטופים באהבה</a> · <a href="https://www.atufim.org/info" target="_blank" rel="noopener noreferrer">עמוד מידע וזכאות</a></p>
+          <p><a href="https://www.atufim.org/" target="_blank" rel="noopener">לאתר עטופים באהבה</a> · <a href="https://www.atufim.org/info" target="_blank" rel="noopener">עמוד מידע וזכאות</a></p>
         </article>
 
         <article class="mini-card">
           <h3>OneFamily</h3>
           <p>סיוע רגשי, קהילתי, משפטי ולעיתים גם כלכלי לנפגעי טרור ולמשפחות שכולות.</p>
-          <p><a href="https://onefamilytogether.org/he/" target="_blank" rel="noopener noreferrer">לאתר OneFamily</a></p>
+          <p><a href="https://onefamilytogether.org/he/" target="_blank" rel="noopener">לאתר OneFamily</a></p>
         </article>
 
         <article class="mini-card">
           <h3>NATAL / נט״ל</h3>
           <p>תמיכה נפשית וטיפול בטראומה לנפגעי מלחמה וטרור, למשפחות ולילדים.</p>
-          <p><a href="https://www.natal.org.il/" target="_blank" rel="noopener noreferrer">לאתר נט״ל</a></p>
+          <p><a href="https://www.natal.org.il/" target="_blank" rel="noopener">לאתר נט״ל</a></p>
         </article>
 
         <article class="mini-card">
           <h3>אתר "לעד"</h3>
           <p>אתר ההנצחה הרשמי של חללי פעולות האיבה: נר זיכרון, חיפוש חללים ומידע שימושי למשפחות.</p>
-          <p><a href="https://laad.btl.gov.il/" target="_blank" rel="noopener noreferrer">לאתר לעד</a></p>
+          <p><a href="https://laad.btl.gov.il/" target="_blank" rel="noopener">לאתר לעד</a></p>
         </article>
 
         <article class="mini-card">
           <h3>שאלות ותשובות — חרבות ברזל</h3>
           <p>עמוד שאלות נפוצות של ביטוח לאומי עם סעיפים ייעודיים למשפחות שכולות, נפגעי איבה וחללי 7.10.</p>
-          <p><a href="https://www.btl.gov.il/About/faq/HarvotBarzelOuestions/Pages/default.aspx" target="_blank" rel="noopener noreferrer">לעמוד השאלות והתשובות</a></p>
+          <p><a href="https://www.btl.gov.il/About/faq/HarvotBarzelOuestions/Pages/default.aspx" target="_blank" rel="noopener">לעמוד השאלות והתשובות</a></p>
         </article>
 
         <article class="mini-card">
           <h3>פורטל זכויות 7.10</h3>
           <p>מענק סיוע, סל טיפול ושיקום, מוקדים ומסלולי סיוע של הביטוח הלאומי לקרובי משפחה של חללים, חטופים וחטופים שחזרו.</p>
-          <p><a href="https://www.btl.gov.il/HaravotBarzel1/MankSYOA7.10/Pages/default.aspx" target="_blank" rel="noopener noreferrer">לפורטל 7.10</a></p>
+          <p><a href="https://www.btl.gov.il/HaravotBarzel1/MankSYOA7.10/Pages/default.aspx" target="_blank" rel="noopener">לפורטל 7.10</a></p>
         </article>
 
         <article class="mini-card">
           <h3>חמניות</h3>
           <p>תמיכה רגשית וחברתית לילדים ובני נוער שכולים. לא גוף ייעודי רק ל־7.10, אך רלוונטי מאוד לילדים שהתייתמו או חוו אובדן.</p>
-          <p><a href="https://sunflowers.org.il/" target="_blank" rel="noopener noreferrer">לאתר חמניות</a></p>
+          <p><a href="https://sunflowers.org.il/" target="_blank" rel="noopener">לאתר חמניות</a></p>
         </article>
       </div>
     </section>
@@ -308,7 +306,7 @@
           <p>אם האדם היה <strong>בן 30 ומעלה</strong> בתאריך זה, הוא זכאי לסיוע במסגרת <strong>סל שיקום וחוסן</strong> נכון לשנת 2026.</p>
         </article>
       </div>
-      <p class="section-note">למידע המלא ולבדיקת זכאות מול העמותה: <a href="https://www.atufim.org/info" target="_blank" rel="noopener noreferrer">עמוד המידע של עטופים באהבה</a></p>
+      <p class="section-note">למידע המלא ולבדיקת זכאות מול העמותה: <a href="https://www.atufim.org/info" target="_blank" rel="noopener">עמוד המידע של עטופים באהבה</a></p>
     </section>
 
     <section id="kidsCorner" class="section-card">
@@ -335,9 +333,9 @@
         <article class="mini-card">
           <h3>מסגרות רלוונטיות</h3>
           <ul class="guide-list">
-            <li><a href="https://www.atufim.org/" target="_blank" rel="noopener noreferrer">עטופים באהבה</a></li>
-            <li><a href="https://sunflowers.org.il/" target="_blank" rel="noopener noreferrer">חמניות</a></li>
-            <li><a href="https://www.natal.org.il/" target="_blank" rel="noopener noreferrer">נט״ל</a></li>
+            <li><a href="https://www.atufim.org/" target="_blank" rel="noopener">עטופים באהבה</a></li>
+            <li><a href="https://sunflowers.org.il/" target="_blank" rel="noopener">חמניות</a></li>
+            <li><a href="https://www.natal.org.il/" target="_blank" rel="noopener">נט״ל</a></li>
           </ul>
         </article>
       </div>
@@ -417,20 +415,9 @@
         <button class="btn btn-primary" id="shareSiteBtn">שליחה ב‑WhatsApp</button>
       </div>
     </section>
-  
-    <section id="contactUs" class="section-card">
-      <h2>יצירת קשר</h2>
-      <p class="section-note">אם יש שאלה, תיקון חשוב או צורך בהכוונה ראשונית, אפשר לפנות במייל.</p>
-      <div class="actions-row">
-        <a class="btn btn-primary" href="mailto:contact@example.org?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%90%D7%AA%D7%A8%20%D7%A1%D7%99%D7%95%D7%A2%207.10">שלחו מייל</a>
-      </div>
-      <p class="section-note">עדכנו את כתובת המייל הזו לכתובת האמיתית שלכם לפני פרסום האתר.</p>
-    </section>
-
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-note-top">קישורים חיצוניים נפתחים בלשונית חדשה כדי שתוכלו לחזור בקלות לאתר.</div>
     <div class="container footer-grid">
       <div>
         <strong>מרכז סיוע למשפחות שכולות 7.10</strong>
@@ -445,7 +432,6 @@
         <strong>מיקום</strong>
         <p>ישראל</p>
         <p><a href="#contactTrust">שיתוף האתר</a></p>
-        <p class="coming-soon" title="קישורי רשתות חברתיות יתווספו לאחר פתיחת חשבונות רשמיים">רשתות חברתיות: בקרוב</p>
       </div>
     </div>
   </footer>
@@ -454,6 +440,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=31"></script>
+  <script src="script.js?v=33"></script>
 </body>
 </html>
