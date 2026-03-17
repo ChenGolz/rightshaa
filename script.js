@@ -432,3 +432,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fb.title = "מעבר ישיר לרגע של נשימה";
   }
 });
+
+
+// v29 keep breathing as top priority
+document.addEventListener("DOMContentLoaded", () => {
+  const fb = document.getElementById("floatingBreathe");
+  if (fb) {
+    fb.innerHTML = "🫁 רגע של נשימה";
+    fb.setAttribute("aria-label", "מעבר לרגע של נשימה");
+  }
+});

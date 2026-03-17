@@ -27,6 +27,7 @@
 
   <nav class="top-nav">
     <div class="container nav-wrap">
+      <a href="#breatheSection">רגע של נשימה</a>
       <a href="#letters">פנייה מהירה</a>
       <a href="#benefitsTracker">זכויות וסיוע</a>
       <a href="#smartTimeline">תאריכים חשובים</a>
@@ -48,6 +49,22 @@
   </section>
 
   <main class="container">
+<section id="breatheSection" class="section-card breathe-section breathe-pretty breathe-priority">
+      <div class="priority-kicker">התחילו כאן אם אתם מרגישים מוצפים</div><h2>רגע של נשימה</h2>
+      <p class="section-note">אם אתם מרגישים מוצפים, אפשר לעצור כאן לדקה אחת ולנשום בקצב פשוט.</p>
+
+      <div class="breathe-panel"><div class="breathe-soft-text">אם קשה לחשוב כרגע, אפשר פשוט לעקוב אחרי העיגול.</div>
+        <div class="breathe-circle" id="breatheCircle">
+          <span id="breatheInnerText">נשימה</span>
+        </div>
+        <div id="breatheStatus" class="breathe-status">מוכנים להתחיל</div>
+        <div class="actions-row center-row">
+          <button class="btn btn-primary" id="startBreathe">התחל/י נשימה</button>
+          <button class="btn btn-secondary" id="stopBreathe">עצור/י נשימה</button>
+        </div>
+      </div>
+    </section>
+
     <section id="letters" class="section-card">
       <h2>פנייה מהירה לגורמי סיוע</h2>
       <p class="section-note">אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי למשפחות 7.10. הפרטים שאתם מזינים כאן אינם נשמרים באתר.</p>
@@ -236,7 +253,7 @@
         <article class="mini-card">
           <h3>עטופים באהבה (ICF)</h3>
           <p>עמותה ייעודית לילדים ובני נוער שאיבדו הורה אחד או שניים ב־7 באוקטובר, עם תמיכה ארוכת טווח, חוסן, שיקום וליווי.</p>
-          <p><a href="https://www.atufim.org/" target="_blank" rel="noopener">לאתר עטופים באהבה</a></p>
+          <p><a href="https://www.atufim.org/" target="_blank" rel="noopener">לאתר עטופים באהבה</a> · <a href="https://www.atufim.org/info" target="_blank" rel="noopener">עמוד מידע וזכאות</a></p>
         </article>
 
         <article class="mini-card">
@@ -255,6 +272,12 @@
           <h3>אתר "לעד"</h3>
           <p>אתר ההנצחה הרשמי של חללי פעולות האיבה: נר זיכרון, חיפוש חללים ומידע שימושי למשפחות.</p>
           <p><a href="https://laad.btl.gov.il/" target="_blank" rel="noopener">לאתר לעד</a></p>
+        </article>
+
+        <article class="mini-card">
+          <h3>שאלות ותשובות — חרבות ברזל</h3>
+          <p>עמוד שאלות נפוצות של ביטוח לאומי עם סעיפים ייעודיים למשפחות שכולות, נפגעי איבה וחללי 7.10.</p>
+          <p><a href="https://www.btl.gov.il/About/faq/HarvotBarzelOuestions/Pages/default.aspx" target="_blank" rel="noopener">לעמוד השאלות והתשובות</a></p>
         </article>
 
         <article class="mini-card">
@@ -329,21 +352,7 @@
       </div>
     </section>
 
-    <section id="breatheSection" class="section-card breathe-section breathe-pretty breathe-priority">
-      <h2>רגע של נשימה</h2>
-      <p class="section-note">אם אתם מרגישים מוצפים, אפשר לעצור כאן לדקה אחת ולנשום בקצב פשוט.</p>
-
-      <div class="breathe-panel"><div class="breathe-soft-text">אם קשה לחשוב כרגע, אפשר פשוט לעקוב אחרי העיגול.</div>
-        <div class="breathe-circle" id="breatheCircle">
-          <span id="breatheInnerText">נשימה</span>
-        </div>
-        <div id="breatheStatus" class="breathe-status">מוכנים להתחיל</div>
-        <div class="actions-row center-row">
-          <button class="btn btn-primary" id="startBreathe">התחל/י נשימה</button>
-          <button class="btn btn-secondary" id="stopBreathe">עצור/י נשימה</button>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="help" class="section-card">
       <h2>מוקדי חירום</h2>

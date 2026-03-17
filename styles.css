@@ -522,3 +522,44 @@ textarea{
 #atufimEligibility strong{
   color:#fff;
 }
+
+
+/* v29 breathing first */
+.priority-kicker{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:rgba(107,179,142,0.14);
+  color:#dff5e8;
+  border:1px solid rgba(107,179,142,0.25);
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+#breatheSection{
+  scroll-margin-top:90px;
+}
+#breatheSection .section-note{
+  font-size:1.03rem;
+}
+.breathe-circle{
+  width:200px !important;
+  height:200px !important;
+  font-size:1.75rem !important;
+}
+.breathe-circle span{
+  font-size:1.7rem !important;
+}
+.floating-breathe{
+  padding:20px 26px !important;
+  border-radius:24px !important;
+  font-size:1.06rem !important;
+}
+@media (max-width:680px){
+  .breathe-circle{
+    width:160px !important;
+    height:160px !important;
+  }
+}
