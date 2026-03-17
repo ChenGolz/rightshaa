@@ -6,16 +6,16 @@
   <title>סיוע למשפחות שכולות שער הנגב</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי האובדן." />
-  <link rel="manifest" href="manifest.json?v=49" />
+  <link rel="manifest" href="manifest.json?v=50" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=49" />
+  <link rel="stylesheet" href="styles.css?v=50" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
   <header class="hero">
     <div class="container">
-      <div class="hero-badge">סיוע ממוקד למשפחות שאיבדו את יקיריהן ב־7 באוקטובר</div>
-      <h1 class="hero-title">מרכז סיוע למשפחות שכולות<br><span>7 באוקטובר 2023</span></h1>
+      <div class="hero-badge">סיוע ממוקד למשפחות שכולות באזור שער הנגב</div>
+      <h1 class="hero-title">סיוע למשפחות שכולות<br><span>שער הנגב והסביבה</span></h1>
       <p class="hero-subtitle">מידע, זכויות, תמיכה רגשית וכלים מעשיים — במקום אחד, בשפה רגועה וברורה.</p>
       <p class="hero-sub-subtitle">האתר עוזר לנווט בין זכויות, טיפול רגשי, ארגוני סיוע ומסמכים חשובים — בלי לשמור את הפרטים האישיים שמוזנים במחולל הפנייה.</p>
 
@@ -79,7 +79,7 @@
           <span id="breatheInnerText">נשימה</span>
         </div>
         <div id="breatheStatus" class="breathe-status">מוכנים להתחיל</div>
-        <div class="actions-row stepper-actions"><button class="btn btn-secondary" id="backToStep1Btn" type="button">חזרה</button><button class="btn btn-primary" id="toStep3Btn" type="button">הבא</button></div></div><div class="step-panel" data-step-panel="3"><div class="actions-row center-row">
+        <div class="actions-row center-row">
           <button class="btn btn-primary" id="startBreathe" type="button">התחל/י נשימה</button>
           <button class="btn btn-secondary" id="stopBreathe" type="button">עצור/י נשימה</button>
         </div>
@@ -152,78 +152,99 @@
 
     <section id="letters" class="section-card">
       <h2>פנייה מהירה לגורמי סיוע</h2>
-      <p class="section-note">אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי. הפרטים שמוזנים כאן אינם נשמרים באתר.</p>
+      <p class="section-note">המחולל מחולק לשלבים קצרים כדי להפחית עומס. אפשר לעבור קדימה ואחורה, וליצור פנייה גם בלי למלא את כל השדות.</p>
 
-      <form id="letterForm">
-        <div class="step-panel active" data-step-panel="1"><div class="form-grid">
-          <label>שם מלא
-            <input id="letterName" type="text" autocomplete="off">
-          </label>
-          <label>מספר תעודת זהות <span class="lock-note" title="המספר משמש רק למילוי המכתב ולא עוזב את המכשיר שלך">🔒</span>
-            <input id="letterId" type="text" autocomplete="off">
-            <small class="field-help">המספר משמש רק למילוי המכתב ולא נשמר בשרת.</small>
-          </label>
-          <label>קרבה
-            <select id="letterRelation">
-              <option value="">בחרו</option>
-              <option>הורה</option>
-              <option>בן/בת זוג</option>
-              <option>אח/ות</option>
-              <option>ילד/ה</option>
-              <option>בן/בת משפחה</option>
-            </select>
-          </label>
-          <label>שם הנפטר/ת
-            <input id="letterDeceased" type="text" autocomplete="off">
-          </label>
-          <label>תאריך האובדן
-            <input id="letterDate" type="date">
-            <small id="letterDateError" class="field-error"></small>
-          </label>
-          <label>יעד הפנייה
-            <select id="letterTarget">
-              <option>ביטוח לאומי — נפגעי פעולות איבה</option>
-              <option>עטופים באהבה</option>
-              <option>OneFamily</option>
-              <option>NATAL / נט״ל</option>
-              <option>מרכז חוסן</option>
-            </select>
-          </label>
-          <label>מה מבקשים
-            <select id="letterNeed">
-              <option>כללי</option>
-              <option>סיוע נפשי</option>
-              <option>מלגות</option>
-              <option>מענק כספי</option>
-              <option>מידע על זכויות וסיוע</option>
-              <option>סיוע כלכלי</option>
-              <option>ליווי בהגשת טפסים</option>
-              <option>בקשה לסיוע במימון הוצאות קבורה ומצבה</option>
-              <option>פנייה בנושא מלגות לימודים לשנת הלימודים הקרובה</option>
-              <option>בקשה למידע על מענקי דיור ושיפוץ</option>
-              <option>פנייה לקבלת סיוע נפשי פרטני/קבוצתי</option>
-              <option>בקשה להכרה כבן/בת משפחה שכולה לצורך הטבות רפואיות</option>
-            </select>
-          </label>
-          <label>טלפון
-            <input id="letterPhone" type="text" autocomplete="off">
-          </label>
-          <label>אימייל
-            <input id="letterEmail" type="email" autocomplete="off">
-          </label>
+      <form id="letterForm" class="letter-form-card">
+        <div class="stepper-head">
+          <span class="step-badge active" data-step-badge="1">שלב 1: פרטים אישיים</span>
+          <span class="step-badge" data-step-badge="2">שלב 2: פרטי הפנייה</span>
+          <span class="step-badge" data-step-badge="3">שלב 3: יצירה ושליחה</span>
         </div>
 
-        </div><div class="actions-row stepper-actions"><button class="btn btn-primary" id="toStep2Btn" type="button">הבא</button></div></div><div class="step-panel" data-step-panel="2"><p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר. אחרי לחיצה על פנייה מהירה, המכתב יתמלא אוטומטית לפי הגוף והנושא.</p>
-
-        <div class="actions-row">
-          <button class="btn btn-primary" id="generateLetter" type="submit">צור מכתב</button>
-          <button class="btn btn-secondary" id="copyLetter" type="button">העתק טקסט</button>
-          <button class="btn btn-secondary" id="downloadPdfBtn" type="button">הורד PDF</button>
-          <button class="btn btn-secondary" id="generateMailBtn" type="button">צור אימייל</button>
-          <button class="btn btn-secondary" id="sendLetterWhatsappBtn" type="button" disabled>שליחה ב‑WhatsApp</button>
-          <button class="btn btn-secondary" id="clearDraftBtn" type="button">נקה מהדפדפן</button>
+        <div class="step-panel active" data-step-panel="1">
+          <div class="form-grid">
+            <label>שם מלא
+              <input id="letterName" type="text" autocomplete="off">
+            </label>
+            <label>מספר תעודת זהות <span class="lock-note" title="המספר משמש רק למילוי המכתב ולא עוזב את המכשיר שלך">🔒</span>
+              <input id="letterId" type="text" autocomplete="off">
+              <small class="field-help">המספר משמש רק למילוי המכתב ולא נשמר בשרת.</small>
+            </label>
+            <label>קרבה
+              <select id="letterRelation">
+                <option value="">בחרו</option>
+                <option>הורה</option>
+                <option>בן/בת זוג</option>
+                <option>אח/ות</option>
+                <option>ילד/ה</option>
+                <option>בן/בת משפחה</option>
+              </select>
+            </label>
+            <label>שם הנפטר/ת
+              <input id="letterDeceased" type="text" autocomplete="off">
+            </label>
+            <label>תאריך האובדן
+              <input id="letterDate" type="date">
+              <small id="letterDateError" class="field-error"></small>
+            </label>
+            <label>טלפון
+              <input id="letterPhone" type="text" autocomplete="off">
+            </label>
+          </div>
+          <div class="actions-row stepper-actions">
+            <button class="btn btn-primary" id="toStep2Btn" type="button">הבא</button>
+          </div>
         </div>
-      </div></form>
+
+        <div class="step-panel" data-step-panel="2">
+          <div class="form-grid">
+            <label>יעד הפנייה
+              <select id="letterTarget">
+                <option>ביטוח לאומי — נפגעי פעולות איבה</option>
+                <option>עטופים באהבה</option>
+                <option>OneFamily</option>
+                <option>NATAL / נט״ל</option>
+                <option>מרכז חוסן</option>
+              </select>
+            </label>
+            <label>מה מבקשים
+              <select id="letterNeed">
+                <option>כללי</option>
+                <option>סיוע נפשי</option>
+                <option>מלגות</option>
+                <option>מענק כספי</option>
+                <option>מידע על זכויות וסיוע</option>
+                <option>סיוע כלכלי</option>
+                <option>ליווי בהגשת טפסים</option>
+                <option>בקשה לסיוע במימון הוצאות קבורה ומצבה</option>
+                <option>פנייה בנושא מלגות לימודים לשנת הלימודים הקרובה</option>
+                <option>בקשה למידע על מענקי דיור ושיפוץ</option>
+                <option>פנייה לקבלת סיוע נפשי פרטני/קבוצתי</option>
+                <option>בקשה להכרה כבן/בת משפחה שכולה לצורך הטבות רפואיות</option>
+              </select>
+            </label>
+            <label>אימייל
+              <input id="letterEmail" type="email" autocomplete="off">
+            </label>
+          </div>
+          <p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר. אחרי לחיצה על פנייה מהירה, המכתב יתמלא אוטומטית לפי הגוף והנושא.</p>
+          <div class="actions-row stepper-actions">
+            <button class="btn btn-secondary" id="backToStep1Btn" type="button">חזרה</button>
+            <button class="btn btn-primary" id="toStep3Btn" type="button">הבא</button>
+          </div>
+        </div>
+
+        <div class="step-panel" data-step-panel="3">
+          <div class="actions-row center-row">
+            <button class="btn btn-primary" id="generateLetter" type="submit">צור מכתב</button>
+            <button class="btn btn-secondary" id="copyLetter" type="button">העתק טקסט</button>
+            <button class="btn btn-secondary" id="downloadPdfBtn" type="button">הורד PDF</button>
+            <button class="btn btn-secondary" id="generateMailBtn" type="button">צור אימייל</button>
+            <button class="btn btn-secondary" id="sendLetterWhatsappBtn" type="button" disabled>שליחה ב‑WhatsApp</button>
+            <button class="btn btn-secondary" id="clearDraftBtn" type="button">נקה מהדפדפן</button>
+          </div>
+        </div>
+      </form>
 
       <textarea id="letterOutput" class="letter-output" placeholder="כאן יופיע נוסח הפנייה בפורמט מסודר וברור"></textarea>
     </section>
@@ -795,6 +816,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=49"></script>
+  <script src="script.js?v=50"></script>
 </body>
 </html>
