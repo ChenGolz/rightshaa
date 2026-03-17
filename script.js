@@ -68,28 +68,27 @@ document.addEventListener("DOMContentLoaded", () => {
     lines.push("לכבוד " + target + ",");
     lines.push("");
     lines.push("שלום רב,");
+    lines.push("אני פונה אליכם בבקשה לקבל מידע, הכוונה וסיוע בנוגע לזכויות של משפחה שכולה מאירועי 7 באוקטובר 2023.");
     lines.push("");
 
     if (name || idNum || relation || deceased || lossDate) {
-      const details = [];
-      if (name) details.push("שמי " + name);
-      if (idNum) details.push("ת״ז " + idNum);
-      if (relation) details.push(relation + " של");
-      if (deceased) details.push(deceased);
-      if (lossDate) details.push("שהלך/ה לעולמו/ה בתאריך " + lossDate);
-      lines.push(details.join(" ") + ".");
-    } else {
-      lines.push("אני פונה אליכם בבקשה לקבל מידע, הכוונה וסיוע בנוגע לזכויות של משפחה שכולה מאירועי 7 באוקטובר 2023.");
+      lines.push("להלן פרטי הפנייה:");
+      if (name) lines.push("• שם הפונה: " + name);
+      if (idNum) lines.push("• תעודת זהות: " + idNum);
+      if (deceased) lines.push("• שם הנפטר/ת: " + deceased);
+      if (relation) lines.push("• קרבה לנפטר/ת: " + relation);
+      if (lossDate) lines.push("• תאריך האובדן: " + lossDate);
+      lines.push("");
     }
 
-    lines.push("");
-    lines.push("אבקש לקבל " + need + ", וכן מידע נוסף על הזכויות, המסמכים הנדרשים והשלבים הבאים להמשך טיפול.");
+    lines.push("נושא הפנייה: בקשה ל" + need + ".");
+    lines.push("אודה לקבלת מידע נוסף על הזכויות, המסמכים הנדרשים והשלבים הבאים להמשך טיפול.");
     lines.push("");
 
     if (phone || email) {
       lines.push("ניתן לחזור אליי באמצעות:");
-      if (phone) lines.push("טלפון: " + phone);
-      if (email) lines.push("אימייל: " + email);
+      if (phone) lines.push("• טלפון: " + phone);
+      if (email) lines.push("• אימייל: " + email);
       lines.push("");
     }
 
@@ -99,6 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (name) lines.push(name);
 
     return lines.join("\\n");
+  }
+
+  const requestForm = $("requestForm");
+  if (requestForm) {
+    requestForm.addEventListener("submit", (e) => e.preventDefault());
   }
 
   $("generateLetter").onclick = () => {
@@ -139,8 +143,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $("generateMailBtn").onclick = () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
-    const subject = encodeURIComponent("פנייה בנושא זכויות וסיוע למשפחת 7.10");
-    const body = encodeURIComponent(letterOutput.value || "");
+
+    const name = (letterName?.value || "").trim();
+    const idNum = (letterId?.value || "").trim();
+    const deceased = (letterDeceased?.value || "").trim();
+
+    let subjectText = "פנייה בנושא זכויות וסיוע למשפחת 7.10";
+    if (deceased && idNum) {
+      subjectText += ` - ${deceased} / ת"ז ${idNum}`;
+    } else if (deceased) {
+      subjectText += ` - ${deceased}`;
+    } else if (name && idNum) {
+      subjectText += ` - ${name} (ת"ז ${idNum})`;
+    } else if (name) {
+      subjectText += ` - ${name}`;
+    } else if (idNum) {
+      subjectText += ` - ת"ז ${idNum}`;
+    }
+
+    const subject = encodeURIComponent(subjectText);
+    const body = encodeURIComponent(letterOutput.value || "").replace(/%0A/g, "%0D%0A");
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
@@ -329,13 +351,19 @@ END:VCARD`;
       return;
     }
 
-    let answer = "האתר יכול לתת כיוון ראשוני בלבד. כדאי להתחיל בגוף הרשמי הרלוונטי ובמקביל לבדוק עמותות תמיכה מתאימות.";
+    let answer = "לא מצאתי תשובה מדויקת. במקרים דחופים, מומלץ לחייג למוקד ביטוח לאומי בטלפון 6050* או להיעזר במוקדי החירום שמופיעים באתר.";
     if (q.includes("לאן") || q.includes("קודם") || q.includes("first")) {
       answer = "ברוב המקרים כדאי להתחיל מביטוח לאומי — נפגעי פעולות איבה, ובמקביל לבדוק תמיכה רגשית דרך מרכז חוסן או נט״ל.";
     } else if (q.includes("ילד") || q.includes("ילדים") || q.includes("youth")) {
       answer = "לילדים ובני נוער כדאי לבדוק את עטופים באהבה, חמניות, ונט״ל לפי הצורך הרגשי והמשפחתי.";
     } else if (q.includes("טופס") || q.includes("582")) {
       answer = "אם מדובר בזכויות למשפחה של נרצח בפעולת איבה, כדאי לבדוק את טופס 582 ואת עמודי המידע של ביטוח לאומי למשפחות השכולות.";
+    } else if (q.includes("כסף") || q.includes("כלכל") || q.includes("תגמול") || q.includes("קצבה")) {
+      answer = "לשאלות על קצבאות, תגמולים או סיוע כספי, נקודת ההתחלה הטובה ביותר היא ביטוח לאומי — נפגעי פעולות איבה, וכן פורטל זכויות 7.10 שמופיע באתר.";
+    } else if (q.includes("עבודה") || q.includes("תעסוק")) {
+      answer = "לשאלות תעסוקה, הכנסות או אובדן כושר עבודה, כדאי להתחיל מביטוח לאומי ולבדוק גם מסמכים רפואיים ותעסוקתיים רלוונטיים.";
+    } else if (q.includes("הלוויה") || q.includes("קבורה")) {
+      answer = "בנושאי קבורה, הלוויה או החזרים, כדאי לבדוק את עמודי המידע של ביטוח לאומי למשפחות השכולות ולפנות לגורם הרשמי המלווה.";
     } else if (q.includes("רגשי") || q.includes("טראומה") || q.includes("נפשי")) {
       answer = "לתמיכה רגשית, נקודת התחלה טובה היא מרכז חוסן או נט״ל, ובמקרים מסוימים גם OneFamily.";
     }
@@ -403,4 +431,20 @@ END:VCARD`;
       }
     );
   };
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const floating = document.getElementById("floatingBreathe");
+  const footer = document.querySelector("footer");
+  if (floating && footer && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        floating.style.opacity = entry.isIntersecting ? "0" : "1";
+        floating.style.pointerEvents = entry.isIntersecting ? "none" : "auto";
+        floating.style.transform = entry.isIntersecting ? "translateY(12px)" : "translateY(0)";
+      });
+    }, { threshold: 0.1 });
+    observer.observe(footer);
+  }
 });

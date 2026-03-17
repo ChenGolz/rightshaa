@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=34" />
+  <link rel="manifest" href="manifest.json?v=35" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=34" />
+  <link rel="stylesheet" href="styles.css?v=35" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -81,6 +81,7 @@
       <h2>פנייה מהירה לגורמי סיוע</h2>
       <p class="section-note">אפשר ליצור פנייה גם בלי למלא פרטים — המערכת תייצר נוסח כללי. הפרטים שמוזנים כאן אינם נשמרים באתר.</p>
 
+      <form id="requestForm">
       <div class="form-grid">
         <label>שם מלא
           <input id="letterName" type="text" autocomplete="off">
@@ -130,6 +131,8 @@
         </label>
       </div>
 
+      <p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר.</p>
+
       <div class="actions-row">
         <button class="btn btn-primary" id="generateLetter">צור מכתב</button>
         <button class="btn btn-secondary" id="copyLetter">העתק טקסט</button>
@@ -138,6 +141,7 @@
       </div>
 
       <textarea id="letterOutput" class="letter-output" placeholder="כאן יופיע נוסח הפנייה"></textarea>
+      </form>
     </section>
 
     <section id="benefitsTracker" class="section-card">
@@ -487,6 +491,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=34"></script>
+  <script src="script.js?v=35"></script>
 </body>
 </html>
