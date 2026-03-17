@@ -1,11 +1,9 @@
 
-const CACHE_NAME = 'support-710-v26';
-const urlsToCache = ['./', './index.html', './styles.css?v=26', './script.js?v=26'];
+const CACHE_NAME = 'support-710-v31';
+const urlsToCache = ['./', './index.html', './styles.css?v=31', './script.js?v=31'];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)));
   self.skipWaiting();
 });
 
@@ -20,6 +18,6 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request, {ignoreSearch:false}).then(response => response || fetch(event.request))
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });

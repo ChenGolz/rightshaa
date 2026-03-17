@@ -1,8 +1,7 @@
 
-// PWA
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=26", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=31", { updateViaCache: "none" });
   });
 }
 
@@ -136,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).from(wrapper).save();
   }
   $("downloadPdfBtn").onclick = downloadPdf;
-  if ($("downloadPdfTop")) $("downloadPdfTop").onclick = downloadPdf;
+  $("downloadPdfTop").onclick = downloadPdf;
 
   $("generateMailBtn").onclick = () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
@@ -210,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
     memorialDate.setFullYear(memorialDate.getFullYear() + 1);
     const endDate = new Date(memorialDate);
     endDate.setHours(endDate.getHours() + 1);
-
     const start = memorialDate.toISOString().replace(/[-:]|\\.\\d{3}/g, "").slice(0,15) + "Z";
     const end = endDate.toISOString().replace(/[-:]|\\.\\d{3}/g, "").slice(0,15) + "Z";
     const title = encodeURIComponent("אזכרת שנה ליקירנו");
@@ -227,7 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setError("trackerStart", "נא להזין תאריך מהעבר.");
       return;
     }
-
     const base = new Date(trackerStart.value);
     const plus = (days) => {
       const d = new Date(base);
@@ -258,28 +255,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setError("trackerStart", "");
   };
 
-  // Checklist persistence
-  document.querySelectorAll("[data-checklist]").forEach((box) => {
-    const key = box.dataset.checklist;
-    box.checked = localStorage.getItem(key) === "true";
-    box.addEventListener("change", () => {
-      localStorage.setItem(key, String(box.checked));
-    });
-  });
-
-  // Share
   $("shareSiteBtn").onclick = () => {
     const url = window.location.href;
     const text = encodeURIComponent("מצאתי אתר שעוזר למשפחות שכולות מאירועי 7.10 להתמודד עם זכויות, בירוקרטיה ותמיכה: " + url);
     window.open("https://wa.me/?text=" + text, "_blank");
   };
 
-  // Floating breathe
   $("floatingBreathe").onclick = () => {
     $("breatheSection").scrollIntoView({behavior:"smooth"});
   };
 
-  // Breathing tool
   const breatheCircle = $("breatheCircle");
   const breatheInnerText = $("breatheInnerText");
   const breatheStatus = $("breatheStatus");
@@ -317,7 +302,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $("stopBreathe").onclick = stopBreathing;
 
-  // vCard
   function downloadVCard(name, phone){
     const vcard = `BEGIN:VCARD
 VERSION:3.0
@@ -337,9 +321,28 @@ END:VCARD`;
     btn.addEventListener("click", () => downloadVCard(btn.dataset.name, btn.dataset.phone));
   });
 
-  // Map
+  $("askAiBtn").onclick = () => {
+    const q = ($("aiQuestion").value || "").toLowerCase().trim();
+    const aiAnswer = $("aiAnswer");
+    if (!q) {
+      aiAnswer.innerHTML = `<div class="timeline-item">כתבו שאלה קצרה כדי לקבל כיוון ראשוני.</div>`;
+      return;
+    }
+
+    let answer = "האתר יכול לתת כיוון ראשוני בלבד. כדאי להתחיל בגוף הרשמי הרלוונטי ובמקביל לבדוק עמותות תמיכה מתאימות.";
+    if (q.includes("לאן") || q.includes("קודם") || q.includes("first")) {
+      answer = "ברוב המקרים כדאי להתחיל מביטוח לאומי — נפגעי פעולות איבה, ובמקביל לבדוק תמיכה רגשית דרך מרכז חוסן או נט״ל.";
+    } else if (q.includes("ילד") || q.includes("ילדים") || q.includes("youth")) {
+      answer = "לילדים ובני נוער כדאי לבדוק את עטופים באהבה, חמניות, ונט״ל לפי הצורך הרגשי והמשפחתי.";
+    } else if (q.includes("טופס") || q.includes("582")) {
+      answer = "אם מדובר בזכויות למשפחה של נרצח בפעולת איבה, כדאי לבדוק את טופס 582 ואת עמודי המידע של ביטוח לאומי למשפחות השכולות.";
+    } else if (q.includes("רגשי") || q.includes("טראומה") || q.includes("נפשי")) {
+      answer = "לתמיכה רגשית, נקודת התחלה טובה היא מרכז חוסן או נט״ל, ובמקרים מסוימים גם OneFamily.";
+    }
+    aiAnswer.innerHTML = `<div class="timeline-item">${answer}</div>`;
+  };
+
   const map = L.map("helpMap").setView([31.55, 34.75], 8);
-  window.map = map;
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution: "&copy; OpenStreetMap"
@@ -390,7 +393,6 @@ END:VCARD`;
         if (nearest) {
           mapStatus.textContent = `מתוך הנקודות שכבר הוזנו במפה, הקרוב ביותר הוא: ${nearest.name} (${nearest.distance.toFixed(1)} ק״מ)`;
         }
-
         btn.textContent = defaultLabel;
         btn.disabled = false;
       },
@@ -401,44 +403,4 @@ END:VCARD`;
       }
     );
   };
-});
-
-
-// v26: make floating breathe button more prominent
-document.addEventListener("DOMContentLoaded", () => {
-  const fb = document.getElementById("floatingBreathe");
-  if (fb) {
-    fb.classList.add("floating-breathe-pulse");
-    fb.innerHTML = "🫁 רגע של נשימה";
-  }
-});
-
-// v26: try to force refresh stale service-worker caches on upgrade
-document.addEventListener("DOMContentLoaded", async () => {
-  if ("serviceWorker" in navigator) {
-    try {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for (const reg of regs) reg.update();
-    } catch (e) {}
-  }
-});
-
-
-// v27 prioritize breathing entry point
-document.addEventListener("DOMContentLoaded", () => {
-  const fb = document.getElementById("floatingBreathe");
-  if (fb) {
-    fb.innerHTML = "🫁 רגע של נשימה";
-    fb.title = "מעבר ישיר לרגע של נשימה";
-  }
-});
-
-
-// v29 keep breathing as top priority
-document.addEventListener("DOMContentLoaded", () => {
-  const fb = document.getElementById("floatingBreathe");
-  if (fb) {
-    fb.innerHTML = "🫁 רגע של נשימה";
-    fb.setAttribute("aria-label", "מעבר לרגע של נשימה");
-  }
 });
