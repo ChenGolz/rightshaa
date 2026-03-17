@@ -563,3 +563,32 @@ textarea{
     height:160px !important;
   }
 }
+
+.hero-sub-sub{
+display:block;
+margin-top:10px;
+font-size:0.95rem;
+color:#cfe5ff;
+}
+
+.sticky{
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.cta-main{
+background:#ffda6b !important;
+color:#000 !important;
+font-weight:900;
+}
+
+.site-footer{
+background:#0f2235;
+padding:20px;
+text-align:center;
+margin-top:40px;
+font-size:0.9rem;
+color:#cbd6e2;
+}
+.site-footer a{color:#fff}
