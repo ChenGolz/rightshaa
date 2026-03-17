@@ -362,3 +362,23 @@ textarea{min-height:220px; resize:vertical}
     justify-content:center;
   }
 }
+
+
+.footer-note-top{
+  padding:10px 0 0;
+  color:var(--text-soft);
+  font-size:.92rem;
+  text-align:center;
+}
+.coming-soon{
+  opacity:.85;
+}
+
+
+.support-centers-grid .mini-card p{
+  line-height:1.9;
+  font-size:.96rem;
+}
+.support-centers-grid .mini-card a{
+  word-break:break-word;
+}
