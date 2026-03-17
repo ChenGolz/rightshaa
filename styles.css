@@ -566,3 +566,217 @@ select option{background:#fff;color:#17324c}
     justify-content:center;
   }
 }
+
+
+/* v48 mobile compatibility */
+.nav-toggle{
+  display:none;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  border-radius:14px;
+  min-height:46px;
+  padding:10px 14px;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+}
+.hero-actions .btn,
+.actions-row .btn{
+  min-height:48px;
+}
+@media (max-width: 860px){
+  .hero-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width: 680px){
+  .hero{
+    padding:20px 0 16px;
+  }
+  .hero-badge{
+    font-size:.82rem;
+    margin-bottom:10px;
+  }
+  .hero-title{
+    font-size:1.7rem;
+    line-height:1.18;
+  }
+  .hero-subtitle,
+  .hero-sub-subtitle{
+    font-size:.92rem;
+    line-height:1.55;
+  }
+  .hero-visual{
+    height:66px;
+    margin:14px auto 2px;
+  }
+  .orb-1{width:58px;height:58px;right:18%}
+  .orb-2{width:78px;height:78px;left:20%}
+  .orb-3{width:48px;height:48px;left:44%}
+  .hero-actions{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:16px;
+  }
+  .hero-actions .btn{
+    min-height:46px;
+    padding:10px 12px;
+    font-size:.92rem;
+  }
+  .hero-actions .btn:nth-child(n+5){
+    display:none;
+  }
+
+  .top-nav{
+    top:0;
+  }
+  .nav-shell{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+  }
+  .nav-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .btn-nav-cta{
+    min-height:46px;
+    padding:10px 14px;
+    font-size:.92rem;
+  }
+  .nav-links{
+    grid-column:1 / -1;
+    display:none;
+    width:100%;
+    gap:8px;
+    padding-top:8px;
+  }
+  .top-nav.menu-open .nav-links{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .nav-links a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-height:44px;
+    padding:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    font-size:.9rem;
+    line-height:1.3;
+  }
+
+  .soft-note-banner .container{
+    padding:10px 0;
+  }
+  .soft-note-banner p{
+    font-size:.9rem;
+    line-height:1.5;
+  }
+
+  .section-card{
+    padding:16px;
+    margin:16px 0;
+    border-radius:16px;
+  }
+  .section-card h2{
+    font-size:1.45rem;
+    line-height:1.25;
+  }
+  .section-note{
+    font-size:.94rem;
+    margin-bottom:14px;
+  }
+
+  .breathe-panel{
+    gap:14px;
+  }
+  .breathe-circle{
+    width:140px;
+    height:140px;
+  }
+  .breathe-guidance{
+    font-size:.95rem;
+  }
+
+  .priority-kicker{
+    width:100%;
+    text-align:center;
+    font-size:.88rem;
+    padding:8px 12px;
+  }
+
+  .form-grid,
+  .form-grid.two-col,
+  .cards-grid,
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  label{
+    gap:6px;
+    font-size:.95rem;
+  }
+  input, select, textarea{
+    min-height:48px;
+    padding:12px 14px;
+    font-size:16px;
+  }
+  textarea{
+    min-height:120px;
+  }
+  .actions-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .actions-row .btn,
+  .actions-row a.btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  .role-card{
+    min-height:60px;
+    padding:14px;
+  }
+  .benefit-card,
+  .mini-card,
+  .phone-card{
+    padding:16px;
+  }
+
+  .map-box{
+    min-height:280px;
+  }
+  .city-search-wrap{
+    min-width:100%;
+  }
+
+  .modal-content{
+    width:min(100% - 20px, 560px);
+    padding:18px;
+    margin:10px auto;
+  }
+
+  .floating-breathe{
+    left:10px;
+    bottom:10px;
+    max-width:112px;
+    min-height:42px;
+    font-size:.8rem;
+    padding:10px 12px;
+    border-radius:14px;
+  }
+
+  .back-to-top{
+    right:10px;
+    bottom:62px;
+  }
+}

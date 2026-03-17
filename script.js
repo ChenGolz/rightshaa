@@ -1,7 +1,7 @@
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=47", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=48", { updateViaCache: "none" });
   });
 }
 
@@ -805,4 +805,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     window.location.reload();
   });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector(".top-nav");
+  const navToggleBtn = document.getElementById("navToggleBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  if (nav && navToggleBtn && navLinks) {
+    navToggleBtn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("menu-open");
+      navToggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      navToggleBtn.textContent = isOpen ? "✕ סגירה" : "☰ תפריט";
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 680) {
+          nav.classList.remove("menu-open");
+          navToggleBtn.setAttribute("aria-expanded", "false");
+          navToggleBtn.textContent = "☰ תפריט";
+        }
+      });
+    });
+  }
 });

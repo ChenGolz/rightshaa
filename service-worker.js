@@ -1,6 +1,6 @@
 
-const CACHE_NAME = 'support-710-v47';
-const urlsToCache = ['./', './index.html', './styles.css?v=47', './script.js?v=47'];
+const CACHE_NAME = 'support-710-v48';
+const urlsToCache = ['./', './index.html', './styles.css?v=48', './script.js?v=48'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)));
