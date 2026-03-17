@@ -456,3 +456,113 @@ select option{background:#fff;color:#17324c}
 @media (max-width:680px){
   .role-grid{grid-template-columns:1fr}
 }
+
+
+.hidden{display:none !important}
+.field-help{
+  color:var(--text-soft);
+  font-size:.85rem;
+}
+.lock-note{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:help;
+}
+.city-search-wrap{
+  min-width:220px;
+  flex:1 1 220px;
+}
+.city-search-wrap input{
+  margin-top:8px;
+}
+.btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+.back-to-top{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:140;
+  border:none;
+  border-radius:999px;
+  width:50px;
+  height:50px;
+  background:var(--gold);
+  color:#1f2f3d;
+  font:inherit;
+  font-weight:900;
+  box-shadow:0 12px 30px rgba(0,0,0,.24);
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.back-to-top.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.benefit-card.priority{
+  border-color:rgba(255,218,107,0.35);
+  box-shadow:0 0 0 2px rgba(255,218,107,0.08) inset;
+}
+.benefit-priority{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:rgba(255,218,107,0.16);
+  color:#fff2bf;
+  border:1px solid rgba(255,218,107,0.18);
+  font-size:.88rem;
+  font-weight:800;
+}
+.input-invalid{
+  border-color:#ff9d9d !important;
+  box-shadow:0 0 0 3px rgba(255,157,157,.12) !important;
+}
+
+@media (max-width:680px){
+  .back-to-top{
+    right:12px;
+    bottom:calc(78px + env(safe-area-inset-bottom));
+    width:46px;
+    height:46px;
+  }
+}
+
+
+.btn-sm{
+  padding:8px 12px;
+  font-size:.9rem;
+  border-radius:10px;
+  min-height:44px;
+}
+.benefit-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.benefit-actions .btn{
+  text-decoration:none;
+}
+
+#letters .letter-output{
+  width:100%;
+  direction:rtl;
+  text-align:right;
+  white-space:pre-wrap;
+}
+
+@media (max-width:680px){
+  .benefit-actions{
+    flex-direction:column;
+  }
+  .benefit-actions .btn{
+    width:100%;
+    justify-content:center;
+  }
+}

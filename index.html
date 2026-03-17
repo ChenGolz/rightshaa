@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=45" />
+  <link rel="manifest" href="manifest.json?v=47" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=45" />
+  <link rel="stylesheet" href="styles.css?v=47" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -32,6 +32,7 @@
         <a class="btn btn-secondary" href="#benefitsTracker">📋 זכויות וסיוע</a>
                 <a class="btn btn-secondary" href="#mapSection">🗺️ עזרה קרובה</a>
         <a class="btn btn-accent" href="#help">📞 קבלו עזרה עכשיו</a>
+        <button class="btn btn-secondary" id="globalResetBtn" type="button">🧹 איפוס כללי</button>
       </div>
     </div>
   </header>
@@ -157,8 +158,9 @@
           <label>שם מלא
             <input id="letterName" type="text" autocomplete="off">
           </label>
-          <label>מספר תעודת זהות
+          <label>מספר תעודת זהות <span class="lock-note" title="המספר משמש רק למילוי המכתב ולא עוזב את המכשיר שלך">🔒</span>
             <input id="letterId" type="text" autocomplete="off">
+            <small class="field-help">המספר משמש רק למילוי המכתב ולא נשמר בשרת.</small>
           </label>
           <label>קרבה
             <select id="letterRelation">
@@ -188,10 +190,18 @@
           </label>
           <label>מה מבקשים
             <select id="letterNeed">
+              <option>כללי</option>
+              <option>סיוע נפשי</option>
+              <option>מלגות</option>
+              <option>מענק כספי</option>
               <option>מידע על זכויות וסיוע</option>
-              <option>סיוע רגשי</option>
               <option>סיוע כלכלי</option>
               <option>ליווי בהגשת טפסים</option>
+              <option>בקשה לסיוע במימון הוצאות קבורה ומצבה</option>
+              <option>פנייה בנושא מלגות לימודים לשנת הלימודים הקרובה</option>
+              <option>בקשה למידע על מענקי דיור ושיפוץ</option>
+              <option>פנייה לקבלת סיוע נפשי פרטני/קבוצתי</option>
+              <option>בקשה להכרה כבן/בת משפחה שכולה לצורך הטבות רפואיות</option>
             </select>
           </label>
           <label>טלפון
@@ -202,13 +212,14 @@
           </label>
         </div>
 
-        <p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר.</p>
+        <p class="privacy-inline-note">🔒 הפרטים נשארים על המכשיר שלכם בלבד ואינם נשמרים בשום מאגר. אחרי לחיצה על פנייה מהירה, המכתב יתמלא אוטומטית לפי הגוף והנושא.</p>
 
         <div class="actions-row">
           <button class="btn btn-primary" id="generateLetter" type="submit">צור מכתב</button>
           <button class="btn btn-secondary" id="copyLetter" type="button">העתק טקסט</button>
           <button class="btn btn-secondary" id="downloadPdfBtn" type="button">הורד PDF</button>
           <button class="btn btn-secondary" id="generateMailBtn" type="button">צור אימייל</button>
+          <button class="btn btn-secondary" id="sendLetterWhatsappBtn" type="button" disabled>שליחה ב‑WhatsApp</button>
           <button class="btn btn-secondary" id="clearDraftBtn" type="button">נקה מהדפדפן</button>
         </div>
       </form>
@@ -285,6 +296,10 @@
 
       <div class="actions-row">
         <button class="btn btn-primary" id="locateMeBtn" type="button">מצא מרכז קרוב אליי</button>
+        <label class="city-search-wrap">חיפוש לפי עיר
+          <input id="citySearchInput" type="text" placeholder="למשל: שדרות / אשקלון / אופקים" autocomplete="off">
+        </label>
+        <button class="btn btn-secondary" id="citySearchBtn" type="button">חפש עיר</button>
         <span id="mapStatus" class="section-note inline-note"></span>
       </div>
 
@@ -643,6 +658,7 @@
         <button class="btn btn-primary" id="askAiBtn" type="button">בדקו שאלה</button>
       </div>
       <div id="aiAnswer" class="timeline"></div>
+      <div class="actions-row"><a class="btn btn-secondary hidden" id="faqContactFallback" href="#contactUs">לא מצאת תשובה? פנו אלינו כאן</a></div>
     </section>
 
     <section id="btlPractical" class="section-card">
@@ -741,6 +757,8 @@
     </div>
   </div>
 
+  <button id="backToTopBtn" class="back-to-top" type="button" aria-label="חזרה למעלה">↑</button>
+
   <footer class="site-footer">
     <div class="container footer-note-top">קישורים חיצוניים נפתחים בלשונית חדשה כדי שתוכלו לחזור בקלות לאתר. · עודכן לאחרונה: 17/03/2026</div>
     <div class="container footer-grid">
@@ -766,6 +784,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=45"></script>
+  <script src="script.js?v=47"></script>
 </body>
 </html>

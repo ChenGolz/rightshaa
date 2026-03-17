@@ -1,7 +1,7 @@
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=43", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=47", { updateViaCache: "none" });
   });
 }
 
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const letterPhone = $("letterPhone");
   const letterEmail = $("letterEmail");
   const letterOutput = $("letterOutput");
+  const faqContactFallback = $("faqContactFallback");
 
   const trackerStart = $("trackerStart");
   const trackerOutput = $("trackerOutput");
@@ -57,6 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const setError = (id, text) => {
     const el = $(id + "Error");
     if (el) el.textContent = text || "";
+  };
+
+  const setInvalid = (el, invalid) => {
+    if (!el) return;
+    el.classList.toggle("input-invalid", !!invalid);
   };
 
   const isFutureDate = (value) => {
@@ -82,47 +88,78 @@ document.addEventListener("DOMContentLoaded", () => {
     const deceased = (letterDeceased?.value || "").trim();
     const lossDate = (letterDate?.value || "").trim();
     const target = (letterTarget?.value || "הגורם המטפל").trim();
-    const need = (letterNeed?.value || "מידע על זכויות וסיוע").trim();
+    const need = (letterNeed?.value || "");
     const phone = (letterPhone?.value || "").trim();
     const email = (letterEmail?.value || "").trim();
-
-    const lines = [];
     const today = new Date().toLocaleDateString("he-IL");
+
+    let lines = [];
     lines.push("תאריך: " + today);
     lines.push("");
-    lines.push("לכבוד " + target + ",");
-    lines.push("");
+    lines.push("לכבוד: " + target);
     lines.push("שלום רב,");
-    lines.push("אני פונה אליכם בבקשה לקבל מידע, הכוונה וסיוע בנוגע לזכויות של משפחה שכולה מאירועי 7 באוקטובר 2023.");
     lines.push("");
 
-    if (name || idNum || relation || deceased || lossDate) {
-      lines.push("להלן פרטי הפנייה:");
-      if (name) lines.push("• שם הפונה: " + name);
-      if (idNum) lines.push("• תעודת זהות: " + idNum);
-      if (deceased) lines.push("• שם הנפטר/ת: " + deceased);
-      if (relation) lines.push("• קרבה לנפטר/ת: " + relation);
-      if (lossDate) lines.push("• תאריך האובדן: " + lossDate);
-      lines.push("");
+    let subjectLine = "הנדון: פנייה בנושא זכויות וסיוע בעקבות אירועי 7 באוקטובר";
+    if (need.includes("נפשי")) subjectLine = "הנדון: בקשה לסיוע נפשי וליווי רגשי למשפחת שכול";
+    if (need.includes("מלג")) subjectLine = "הנדון: הגשת מועמדות למלגת לימודים וסיוע אקדמי";
+    if (need.includes("מענק")) subjectLine = "הנדון: בקשה למימוש זכויות כלכליות ומענקי סיוע";
+
+    lines.push(subjectLine);
+    lines.push("");
+
+    lines.push(`אני פונה אליכם כ${relation || "בן/בת משפחה"} של ${deceased || "יקירי"} ז"ל, אשר נפל/ה באירועי השבעה באוקטובר 2023.`);
+    lines.push("");
+
+    switch (true) {
+      case need.includes("נפשי"):
+        lines.push("בתקופה מורכבת זו, משפחתנו מתמודדת עם השלכות האובדן והטראומה. אנו חשים צורך בליווי מקצועי ורגשי מותאם.");
+        lines.push("אודה לבדיקת זכאותנו לטיפולים פרטניים או קבוצתיים במסגרת המענים הקיימים עבורנו.");
+        break;
+      case need.includes("מלג"):
+        lines.push("כחלק מהרצון להמשיך בבנייה וצמיחה למרות הכאב הגדול, אני מעוניין/ת להשתלב בלימודים אקדמיים או מקצועיים.");
+        lines.push("אודה לקבלת פרטים על מלגות ייעודיות למשפחות 7.10, קריטריונים להגשה ולוחות זמנים.");
+        break;
+      case need.includes("מענק") || need.includes("כלכלי"):
+        lines.push("לאור שינוי נסיבות חיינו בעקבות האובדן, אנו זקוקים לבירור מעמיק של המענקים והתמיכות הכספיות המגיעות לנו.");
+        lines.push("נבקש לקבל פירוט על מענקי דיור, מחיה או סיוע חד-פעמי שנועדו להקל על הנטל הכלכלי בתקופה זו.");
+        break;
+      default:
+        lines.push(`אני פונה בבקשה לקבל מידע והכוונה בנוגע ל${need || "זכויות המגיעות לנו"}.`);
+        lines.push("אודה לכם על הדרכה לגבי השלבים הבאים והמסמכים הנדרשים למיצוי זכויותינו.");
     }
 
-    lines.push("נושא הפנייה: בקשה ל" + need + ".");
-    lines.push("אודה לקבלת מידע נוסף על הזכויות, המסמכים הנדרשים והשלבים הבאים להמשך טיפול.");
+    lines.push("");
+    lines.push("להלן פרטיי לזיהוי וטיפול:");
+    if (name) lines.push("• שם מלא: " + name);
+    if (idNum) lines.push("• מספר זהות: " + idNum);
+    if (lossDate) lines.push("• תאריך האובדן: " + lossDate);
     lines.push("");
 
     if (phone || email) {
-      lines.push("פרטי קשר לחזרה:");
+      lines.push("אשמח ליצירת קשר בדרכים הבאות:");
       if (phone) lines.push("• טלפון: " + phone);
       if (email) lines.push("• אימייל: " + email);
       lines.push("");
     }
 
-    lines.push("בתודה מראש על עזרתכם ועל הרגישות.");
-    lines.push("");
-    lines.push("בברכה,");
+    lines.push("בברכה ובתודה מראש על הרגישות והעזרה,");
     if (name) lines.push(name);
 
     return lines.join("\n");
+  }
+
+
+  function hasMinimumLetterContent() {
+    const hasName = !!(letterName?.value || "").trim();
+    const hasNeed = !!(letterNeed?.value || "").trim();
+    return hasName || hasNeed;
+  }
+
+  function updateLetterActionButtons() {
+    const hasOutput = !!(letterOutput?.value || "").trim();
+    const waBtn = $("sendLetterWhatsappBtn");
+    if (waBtn) waBtn.disabled = !hasOutput;
   }
 
   const generateLetterBtn = $("generateLetter");
@@ -130,20 +167,48 @@ document.addEventListener("DOMContentLoaded", () => {
     letterForm.addEventListener("submit", (e) => {
       e.preventDefault();
       setError("letterDate", "");
+      setInvalid(letterName, false);
+      setInvalid(letterNeed, false);
+
+      if (!hasMinimumLetterContent()) {
+        setInvalid(letterName, true);
+        setInvalid(letterNeed, true);
+        if (letterOutput) {
+          letterOutput.value = "כדי ליצור מכתב, כדאי להזין לפחות שם מלא או לבחור נושא פנייה.";
+        }
+        updateLetterActionButtons();
+        return;
+      }
+
       if (isFutureDate(letterDate?.value)) {
         setError("letterDate", "נא להזין תאריך מהעבר.");
         return;
       }
       if (letterOutput) letterOutput.value = buildLetterText();
+      updateLetterActionButtons();
     });
   } else if (generateLetterBtn) {
     generateLetterBtn.onclick = () => {
       setError("letterDate", "");
+      setInvalid(letterName, false);
+      setInvalid(letterNeed, false);
+
+      if (!hasMinimumLetterContent()) {
+        setInvalid(letterName, true);
+        setInvalid(letterNeed, true);
+        if (letterOutput) {
+          letterOutput.value = "כדי ליצור מכתב, כדאי להזין לפחות שם מלא או לבחור נושא פנייה.";
+        }
+        updateLetterActionButtons();
+        return;
+      }
+
       if (isFutureDate(letterDate?.value)) {
         setError("letterDate", "נא להזין תאריך מהעבר.");
         return;
       }
       if (letterOutput) letterOutput.value = buildLetterText();
+      updateLetterActionButtons();
     };
   }
 
@@ -154,6 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const old = copyLetterBtn.textContent;
     copyLetterBtn.textContent = "הועתק";
     setTimeout(() => copyLetterBtn.textContent = old, 1600);
+    updateLetterActionButtons();
+  };
+
+  const sendLetterWhatsappBtn = $("sendLetterWhatsappBtn");
+  if (sendLetterWhatsappBtn) sendLetterWhatsappBtn.onclick = () => {
+    const text = (letterOutput?.value || "").trim();
+    if (!text) return;
+    const msg = encodeURIComponent(text);
+    window.open(`https://wa.me/?text=${msg}`, "_blank");
   };
 
   function downloadPdf() {
@@ -186,6 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (el) el.value = "";
     });
     setError("letterDate", "");
+    setInvalid(letterName, false);
+    setInvalid(letterNeed, false);
+    updateLetterActionButtons();
   };
 
   const generateMailBtn = $("generateMailBtn");
@@ -207,7 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const subject = encodeURIComponent(subjectText);
     const body = encodeURIComponent(letterOutput?.value || "").replace(/%0A/g, "%0D%0A");
 
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    const emailTo = window.selectedOrgEmail || "";
+    window.location.href = `mailto:${emailTo}?subject=${subject}&body=${body}`;
   };
 
   const buildTrackerBtn = $("buildTracker");
@@ -335,12 +413,16 @@ END:VCARD`;
 
   const askAiBtn = $("askAiBtn");
   if (askAiBtn) askAiBtn.onclick = () => {
-    const q = ($("aiQuestion")?.value || "").toLowerCase().trim();
+    const rawQ = ($("aiQuestion")?.value || "");
+    const q = rawQ.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?"'׳״]/g, " ").replace(/\s+/g, " ").trim();
     const aiAnswer = $("aiAnswer");
     if (!aiAnswer) return;
 
+    if (faqContactFallback) faqContactFallback.classList.add("hidden");
+
     if (!q) {
       aiAnswer.innerHTML = `<div class="timeline-item">כתבו שאלה קצרה כדי לקבל כיוון ראשוני.</div>`;
+      if (faqContactFallback) faqContactFallback.classList.remove("hidden");
       return;
     }
 
@@ -365,6 +447,7 @@ END:VCARD`;
       answer = "למלגות לימודים כדאי לבדוק את אזור מלגות והטבות באתר, כולל אור למשפחות, יד לבנים ומלגת קק״ל — קרן ניקולא באומן.";
     }
     aiAnswer.innerHTML = `<div class="timeline-item">${answer}</div>`;
+    if (answer.startsWith("לא מצאתי") && faqContactFallback) faqContactFallback.classList.remove("hidden");
   };
 
   const helpMapEl = $("helpMap");
@@ -433,6 +516,27 @@ END:VCARD`;
         btn.disabled = false;
       }
     );
+  };
+
+
+  const citySearchBtn = $("citySearchBtn");
+  if (citySearchBtn) citySearchBtn.onclick = () => {
+    const mapStatus = $("mapStatus");
+    const term = ($("citySearchInput")?.value || "").trim().toLowerCase();
+    if (!term) {
+      if (mapStatus) mapStatus.textContent = "כתבו שם עיר או יישוב כדי לחפש.";
+      return;
+    }
+    const match = mapPoints.find((p) => (p.name + " " + (p.address || "")).toLowerCase().includes(term));
+    if (!match) {
+      if (mapStatus) mapStatus.textContent = "לא מצאנו נקודה תואמת במפה. נסו עיר אחרת או השתמשו בכפתור איתור מיקום.";
+      return;
+    }
+    if (map) {
+      map.setView([match.lat, match.lng], 11);
+      L.popup().setLatLng([match.lat, match.lng]).setContent(`<strong>${match.name}</strong><br>${match.address || ""}`).openOn(map);
+    }
+    if (mapStatus) mapStatus.textContent = `נמצאה נקודה: ${match.name}`;
   };
 
   const footer = document.querySelector(".site-footer");
@@ -519,24 +623,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) closeModal();
   });
   document.getElementById("sendQuickMailBtn")?.addEventListener("click", () => {
-    const name = (document.getElementById("qName")?.value || "").trim();
-    const phone = (document.getElementById("qPhone")?.value || "").trim();
-    const msg = (document.getElementById("qMessage")?.value || "").trim();
-    const org = orgNameEl?.textContent || "הארגון";
-    const subject = encodeURIComponent(`פנייה חדשה מהאתר: ${name || "ללא שם"} — ${org}`);
-    const bodyText = [
-      "שלום,",
-      "",
-      "נתקבלה פנייה חדשה מהאתר.",
-      name ? "שם: " + name : "",
-      phone ? "טלפון: " + phone : "",
-      msg ? "הודעה: " + msg : "",
-      "",
-      "תודה רבה."
-    ].filter(Boolean).join("\n");
+    const bodyText = (document.getElementById("letterOutput")?.value || "").trim();
+    const emailTo = window.selectedOrgEmail || currentOrgEmail || "";
+    const subject = encodeURIComponent("פנייה בנושא זכויות וסיוע - משפחת 7.10");
     const body = encodeURIComponent(bodyText).replace(/%0A/g, "%0D%0A");
-    const to = currentOrgEmail ? currentOrgEmail : "";
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+
+    if (!bodyText) return;
+    window.location.href = `mailto:${emailTo}?subject=${subject}&body=${body}`;
     closeModal();
   });
 });
@@ -545,97 +638,88 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const benefitsData = [
     {
-      title: "ביטוח לאומי — משפחות שכולות / נפגעי פעולות איבה",
-      desc: "הגוף הרשמי המרכזי למימוש זכויות, תגמולים, מענקים, טפסים ומידע למשפחות שכולות.",
-      roles: ["parent","sibling","partner","child","grandparent"],
-      tags: ["זכויות רשמיות","תגמולים","מענקים"],
-      link: "https://www.btl.gov.il/HaravotBarzel1/Mishpahot_HB/Pages/default.aspx"
+      title: "מענק סיוע כספי מיידי - הסוכנות היהודית",
+      desc: "סיוע ראשוני למשפחות שאיבדו קרוב משפחה ב-7.10 דרך הקרן לנפגעי טרור.",
+      link: "https://www.jewishagency.org/he/terror-victims-fund/",
+      contactEmail: "fund@jafi.org",
+      roles: ["parent", "partner", "child", "sibling"],
+      tags: ["סיוע כספי", "דחוף"],
+      defaultNeed: "מענק כספי"
     },
     {
-      title: "מענק סיוע 7.10",
-      desc: "עמוד ייעודי של ביטוח לאומי למענק סיוע, סל טיפול ושיקום ומסלולי סיוע רלוונטיים.",
-      roles: ["parent","sibling","partner","child"],
-      tags: ["מענק","7.10","סיוע"],
-      link: "https://www.btl.gov.il/HaravotBarzel1/MankSYOA7.10/Pages/default.aspx"
+      title: "טיפול רגשי ומרכזי חוסן - נט״ל",
+      desc: "סיוע נפשי ממוקד טראומה ואובדן לכל בני המשפחה, כולל קו סיוע 24/7.",
+      link: "https://www.natal.org.il/",
+      contactEmail: "info@natal.org.il",
+      roles: ["parent", "partner", "child", "sibling", "grandparent"],
+      tags: ["סיוע נפשי", "טיפול"],
+      defaultNeed: "סיוע נפשי"
     },
     {
-      title: "עטופים באהבה",
-      desc: "ליווי ארוך טווח לילדים ובני נוער שאיבדו הורה ב־7.10, בהתאם לתנאי הזכאות של העמותה.",
+      title: "מלגות לימודים - אור למשפחות",
+      desc: "מלגות לימודים, ימי העצמה וליווי אישי לאחים והורים שכולים.",
+      link: "https://www.or4family.org.il/",
+      contactEmail: "office@or-lfamily.org",
+      roles: ["parent", "sibling"],
+      tags: ["מלגות", "לימודים"],
+      defaultNeed: "מלגות"
+    },
+    {
+      title: "עמותת חמניות - ליווי יתומים",
+      desc: "קהילה תומכת וליווי רגשי חברתי לילדים ובני נוער שאיבדו הורה.",
+      link: "https://www.hamaniot.org/",
+      contactEmail: "office@hamaniot.org",
       roles: ["child"],
-      tags: ["יתומים","ליווי ארוך טווח","חוסן"],
-      link: "https://www.atufim.org/"
+      tags: ["יתומים", "נוער"],
+      defaultNeed: "סיוע נפשי"
     },
     {
-      title: "חמניות",
-      desc: "תמיכה רגשית וחברתית לילדים ובני נוער שכולים.",
-      roles: ["child"],
-      tags: ["ילדים ונוער","תמיכה רגשית"],
-      link: "https://www.hamaniot.org/"
+      title: "OneFamily - מעטפת שיקום מלאה",
+      desc: "ליווי רב-תחומי הכולל סיוע כלכלי, משפטי ופנאי למשפחות השכול.",
+      link: "https://onefamilyovercomingtogether.org/he/",
+      contactEmail: "info@onefamily.org.il",
+      roles: ["parent", "partner", "child", "sibling"],
+      tags: ["סיוע כללי", "שיקום"],
+      defaultNeed: "מענק כספי"
     },
     {
-      title: "אור למשפחות — מלגות לאחים ואחיות",
-      desc: "מלגות ללימודים אקדמיים לאחים ואחיות של הנופלים במערכות ישראל.",
-      roles: ["sibling"],
-      tags: ["מלגות","אחים ואחיות"],
-      link: "https://www.or4family.org.il/"
-    },
-    {
-      title: "יד לבנים — מידעון אחים ואחיות",
-      desc: "מידע מרוכז על תמיכות, זכויות והטבות לאחים ואחיות שכולים.",
-      roles: ["sibling"],
-      tags: ["מידעון","הטבות","אחים ואחיות"],
-      link: "https://yadlabanim.org/%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA-%D7%95%D7%94%D7%98%D7%91%D7%95%D7%AA/"
-    },
-    {
-      title: "כל זכות — סיוע בדיור להורים שכולים",
-      desc: "הסברים בשפה פשוטה על הלוואות, מענקים וסיוע בדיור להורים שכולים של חללי פעולות איבה.",
-      roles: ["parent"],
-      tags: ["דיור","הורים","כל זכות"],
-      link: "https://www.kolzchut.org.il/he/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA_%D7%95%D7%9E%D7%A2%D7%A0%D7%A7%D7%99%D7%9D_%D7%91%D7%AA%D7%97%D7%95%D7%9D_%D7%94%D7%93%D7%99%D7%95%D7%A8_%D7%9C%D7%94%D7%95%D7%A8%D7%99%D7%9D_%D7%A9%D7%9B%D7%95%D7%9C%D7%99%D7%9D_%D7%A9%D7%9C_%D7%97%D7%9C%D7%9C%D7%99_%D7%A4%D7%A2%D7%95%D7%9C%D7%AA_%D7%90%D7%99%D7%91%D7%94"
-    },
-    {
-      title: "משרד הביטחון — הורים שכולים",
-      desc: "מידע נוסף על זכויות, מענקים ותשלומים במקרים שבהם המסלול הזה רלוונטי.",
-      roles: ["parent"],
-      tags: ["הורים","משרד הביטחון"],
-      link: "https://mishpahot-hantzaha.mod.gov.il/benefits/parents"
-    },
-    {
-      title: "כל זכות — מענק נישואין ליתומים",
-      desc: "מידע על מענק נישואין ליתומים של חללי פעולת איבה.",
-      roles: ["child"],
-      tags: ["יתומים","נישואין","מענק"],
-      link: "https://www.kolzchut.org.il/he/%D7%9E%D7%A2%D7%A0%D7%A7_%D7%A0%D7%99%D7%A9%D7%95%D7%90%D7%99%D7%9F_%D7%9C%D7%99%D7%AA%D7%95%D7%9E%D7%99%D7%9D_%D7%A9%D7%9C_%D7%97%D7%9C%D7%9C%D7%99_%D7%A4%D7%A2%D7%95%D7%9C%D7%AA_%D7%90%D7%99%D7%91%D7%94"
-    },
-    {
-      title: "OneFamily",
-      desc: "סיוע רגשי, קהילתי, משפטי ולעיתים גם כלכלי למשפחות נפגעי טרור.",
-      roles: ["parent","sibling","partner","child"],
-      tags: ["קהילה","סיוע רגשי","ליווי"],
-      link: "https://onefamilytogether.org/he/"
-    },
-    {
-      title: "נט״ל",
-      desc: "טיפול בטראומה, חרדה ותמיכה רגשית לבני משפחה במעגלי השכול.",
-      roles: ["parent","sibling","partner","child","grandparent"],
-      tags: ["טראומה","תמיכה רגשית"],
-      link: "https://www.natal.org.il/"
-    },
-    {
-      title: "הסוכנות היהודית — מענק חירום",
-      desc: "סיוע בינלאומי ומענק חירום במקרים רלוונטיים.",
-      roles: ["parent","sibling","partner","child"],
-      tags: ["סיוע מחו״ל","מענק חירום"],
-      link: "https://fvot.jewishagency.org/immediate-support/"
-    },
-    {
-      title: "אור למשפחות — קהילה ותוכניות",
-      desc: "תוכניות חיזוק, קהילה, תוכן, מלגות ויוזמות למשפחות, הורים ואחים.",
-      roles: ["parent","sibling"],
-      tags: ["קהילה","תוכן","מלגות"],
-      link: "https://www.or4family.org.il/"
+      title: "ארגון יד לבנים - זכויות והנצחה",
+      desc: "הארגון היציג לטיפול במשפחות השכולות, הנצחה וזכויות מול משרד הביטחון.",
+      link: "https://yadlabanim.org/",
+      contactEmail: "info@yadlabanim.org.il",
+      roles: ["parent", "sibling"],
+      tags: ["זכויות", "הנצחה"],
+      defaultNeed: "כללי"
     }
   ];
+
+  window.openQuickContact = function(orgName, orgEmail, defaultNeed) {
+    const targetInput = document.getElementById("letterTarget");
+    const needSelect = document.getElementById("letterNeed");
+    const outputArea = document.getElementById("letterOutput");
+
+    if (targetInput) targetInput.value = orgName;
+    if (needSelect) needSelect.value = defaultNeed || "כללי";
+
+    window.selectedOrgEmail = orgEmail || "";
+
+    if (typeof buildLetterText === "function" && outputArea) {
+      outputArea.value = buildLetterText();
+    }
+
+    const waBtn = document.getElementById("sendLetterWhatsappBtn");
+    if (waBtn) waBtn.disabled = !(outputArea && outputArea.value.trim());
+
+    document.getElementById("letters")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const modal = document.getElementById("contactModal");
+    if (modal) {
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    console.log(`מכתב ל-${orgName} הוכן בהצלחה.`);
+  };
 
   const output = document.getElementById("matchedBenefitsOutput");
   const checks = () => [...document.querySelectorAll(".role-check:checked")].map(el => el.value);
@@ -646,22 +730,34 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("selected_roles", JSON.stringify(selected));
 
     if (!selected.length) {
-      output.innerHTML = '<div class="empty-state">בחרו אפשרות אחת או יותר כדי לראות הטבות וגופים רלוונטיים.</div>';
+      output.innerHTML = '<div class="empty-state">בחרו את הקרבה שלכם כדי לראות גופי סיוע רלוונטיים.</div>';
       return;
     }
 
     const matches = benefitsData.filter(item => item.roles.some(role => selected.includes(role)));
+    const priorityWords = ["מענק", "נט״ל", "סיוע", "ביטוח"];
+    matches.sort((a, b) => {
+      const ap = priorityWords.some(w => a.title.includes(w)) ? 1 : 0;
+      const bp = priorityWords.some(w => b.title.includes(w)) ? 1 : 0;
+      return bp - ap;
+    });
 
-    output.innerHTML = matches.map(item => `
-      <article class="benefit-card">
+    output.innerHTML = matches.map(item => {
+      const urgent = priorityWords.some(w => item.title.includes(w));
+      return `
+      <article class="benefit-card ${urgent ? "priority" : ""}">
+        ${urgent ? `<div class="benefit-priority">כדאי לבדוק קודם</div>` : ""}
         <h3>${item.title}</h3>
         <p>${item.desc}</p>
-        <p><a href="${item.link}" target="_blank" rel="noopener noreferrer">למידע נוסף</a></p>
         <div class="benefit-tags">
           ${item.tags.map(tag => `<span class="benefit-tag">${tag}</span>`).join("")}
         </div>
-      </article>
-    `).join("");
+        <div class="benefit-actions">
+          <button class="btn btn-primary btn-sm" type="button" onclick="openQuickContact('${item.title.replace(/'/g, "\'")}', '${(item.contactEmail || "").replace(/'/g, "\'")}', '${(item.defaultNeed || "כללי").replace(/'/g, "\'")}')">פנייה מהירה מהאתר</button>
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">לאתר הארגון</a>
+        </div>
+      </article>`;
+    }).join("");
   }
 
   const saved = JSON.parse(localStorage.getItem("selected_roles") || "[]");
@@ -682,4 +778,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   renderMatchedBenefits();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTopBtn = document.getElementById("backToTopBtn");
+  const globalResetBtn = document.getElementById("globalResetBtn");
+
+  const toggleBackToTop = () => {
+    if (!backToTopBtn) return;
+    const scrolled = window.scrollY;
+    const threshold = document.documentElement.scrollHeight * 0.35;
+    backToTopBtn.classList.toggle("show", scrolled > threshold);
+  };
+  window.addEventListener("scroll", toggleBackToTop, { passive: true });
+  toggleBackToTop();
+
+  backToTopBtn?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  globalResetBtn?.addEventListener("click", () => {
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("draft_") || key.startsWith("check_") || key === "selected_roles" || key.startsWith("step_")) {
+        localStorage.removeItem(key);
+      }
+    });
+    window.location.reload();
+  });
 });
