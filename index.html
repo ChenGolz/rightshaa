@@ -6,9 +6,9 @@
   <title>מרכז סיוע למשפחות שכולות 7.10.2023</title>
   <meta name="theme-color" content="#4d8f73" />
   <meta name="description" content="מידע, זכויות, תמיכה רגשית וכלים מעשיים למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023." />
-  <link rel="manifest" href="manifest.json?v=40" />
+  <link rel="manifest" href="manifest.json?v=41" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=40" />
+  <link rel="stylesheet" href="styles.css?v=41" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -43,6 +43,8 @@
         <a href="#letters">פנייה מהירה</a>
         <a href="#benefitsTracker">זכויות וסיוע</a>
         <a href="#smartTimeline">תאריכים חשובים</a>
+        <a href="#documentsChecklist">מסמכים</a>
+        <a href="#faqQuick">שאלות מהירות</a>
         <a href="#mapSection">מפה</a>
         <a href="#officialResources">גורמי סיוע</a>
         <a href="#curatedLinks">קישורים חשובים</a>
@@ -141,6 +143,7 @@
           <button class="btn btn-secondary" id="copyLetter" type="button">העתק טקסט</button>
           <button class="btn btn-secondary" id="downloadPdfBtn" type="button">הורד PDF</button>
           <button class="btn btn-secondary" id="generateMailBtn" type="button">צור אימייל</button>
+          <button class="btn btn-secondary" id="clearDraftBtn" type="button">נקה מהדפדפן</button>
         </div>
       </form>
 
@@ -193,6 +196,43 @@
       <div class="section-note">זהו כלי עזר בלבד. לתאריכים הלכתיים או רשמיים יש לאמת מול הגורם המתאים.</div>
     </section>
 
+
+    <section id="documentsChecklist" class="section-card">
+      <h2>רשימת מסמכים להכנה</h2>
+      <p class="section-note">רשימת עזר בסיסית למסמכים שכדאי להכין מראש. הסימון נשמר רק בדפדפן של המכשיר שלכם, וניתן למחוק אותו בכל רגע.</p>
+      <div class="cards-grid">
+        <article class="mini-card">
+          <ul class="guide-list checklist">
+            <li><label><input type="checkbox" data-check="doc-id"> צילום תעודת זהות + ספח של הפונה</label></li>
+            <li><label><input type="checkbox" data-check="doc-bank"> אישור ניהול חשבון בנק / צילום צ׳ק</label></li>
+            <li><label><input type="checkbox" data-check="doc-will"> צו ירושה / צו קיום צוואה (אם יש)</label></li>
+            <li><label><input type="checkbox" data-check="doc-death"> אישור פטירה / הודעה רשמית</label></li>
+            <li><label><input type="checkbox" data-check="doc-medical"> מסמכים רפואיים / דוחות טיפול (אם רלוונטי)</label></li>
+          </ul>
+          <div class="actions-row">
+            <button class="btn btn-secondary" id="copyChecklistBtn" type="button">העתק רשימה</button>
+            <button class="btn btn-secondary" id="clearChecklistBtn" type="button">נקה סימונים</button>
+          </div>
+        </article>
+        <article class="mini-card">
+          <h3>למה זה חשוב</h3>
+          <p>איסוף מסמכים מוקדם יכול לקצר מאוד את ההתנהלות מול ביטוח לאומי, מרכזי חוסן, עמותות וגורמים נוספים. לפעמים עצם הרשימה נותנת תחושת שליטה בתוך העומס.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="faqQuick" class="section-card">
+      <h2>שאלות מהירות</h2>
+      <p class="section-note">אפשר להקליד שאלה קצרה או ללחוץ על תגית מוכנה. הוספנו גם תמיכה בשאלות על סיוע מחו״ל, פדרציות ותרומות.</p>
+      <div class="chip-row">
+        <button class="chip-btn" type="button" data-faq-tag="מענקים">#מענקים</button>
+        <button class="chip-btn" type="button" data-faq-tag="סיוע נפשי">#סיוע_נפשי</button>
+        <button class="chip-btn" type="button" data-faq-tag="ביטוח לאומי">#ביטוח_לאומי</button>
+        <button class="chip-btn" type="button" data-faq-tag="סיוע מחו״ל">#סיוע_מחו״ל</button>
+      </div>
+      <p class="section-note">לסיוע מחו״ל: <a href="https://fvot.jewishagency.org/immediate-support/" target="_blank" rel="noopener noreferrer">הסוכנות היהודית — קרן לנפגעי טרור</a> · <a href="https://www.guidestar.org.il/" target="_blank" rel="noopener noreferrer">גיידסטאר ישראל</a></p>
+    </section>
+
     <section id="mapSection" class="section-card">
       <h2>עזרה קרובה אליי</h2>
       <p class="section-note">מפה חלקית של מוקדי סיוע רלוונטיים: מרכזי חוסן וביטוח לאומי. מתחת למפה הוספנו גם רשימה מורחבת של מוקדים, טלפונים וכתובות כדי שיהיה קל יותר למצוא קשר ישיר גם בלי להשתמש במפה.</p>
@@ -239,6 +279,7 @@
           <h3>ביטוח לאומי — משפחות שכולות / נפגעי פעולות איבה</h3>
           <p>הגוף הרשמי המרכזי למימוש זכויות, קצבאות, טפסים, טיפול רגשי, מענקי סיוע ואוגדן זכויות למשפחות השכולות.</p>
           <p><a href="https://www.btl.gov.il/HaravotBarzel1/Mishpahot_HB/Pages/default.aspx" target="_blank" rel="noopener noreferrer">מידע שימושי למשפחות השכולות</a></p>
+          <button class="btn btn-secondary quick-contact-btn" type="button" data-org="ביטוח לאומי — נפגעי פעולות איבה" data-email="">פנייה מהירה מהאתר</button>
         </article>
         <article class="mini-card">
           <h3>טופס 582 — תביעה למשפחות</h3>
@@ -249,16 +290,19 @@
           <h3>עטופים באהבה</h3>
           <p>עמותה ייעודית לילדים ובני נוער שאיבדו הורה אחד או שניים ב־7 באוקטובר, עם תמיכה ארוכת טווח, חוסן, שיקום וליווי.</p>
           <p><a href="https://www.atufim.org/" target="_blank" rel="noopener noreferrer">לאתר עטופים באהבה</a> · <a href="https://www.atufim.org/info" target="_blank" rel="noopener noreferrer">עמוד מידע וזכאות</a></p>
+          <button class="btn btn-secondary quick-contact-btn" type="button" data-org="עטופים באהבה" data-email="">פנייה מהירה מהאתר</button>
         </article>
         <article class="mini-card">
           <h3>OneFamily</h3>
           <p>סיוע רגשי, קהילתי, משפטי ולעיתים גם כלכלי לנפגעי טרור ולמשפחות שכולות.</p>
           <p><a href="https://onefamilytogether.org/he/" target="_blank" rel="noopener noreferrer">לאתר OneFamily</a></p>
+          <button class="btn btn-secondary quick-contact-btn" type="button" data-org="OneFamily" data-email="">פנייה מהירה מהאתר</button>
         </article>
         <article class="mini-card">
           <h3>NATAL / נט״ל</h3>
           <p>תמיכה נפשית וטיפול בטראומה לנפגעי מלחמה וטרור, למשפחות ולילדים.</p>
           <p><a href="https://www.natal.org.il/" target="_blank" rel="noopener noreferrer">לאתר נט״ל</a></p>
+          <button class="btn btn-secondary quick-contact-btn" type="button" data-org="נט״ל" data-email="">פנייה מהירה מהאתר</button>
         </article>
         <article class="mini-card">
           <h3>אתר "לעד"</h3>
@@ -279,6 +323,7 @@
           <h3>חמניות</h3>
           <p>תמיכה רגשית וחברתית לילדים ובני נוער שכולים. לא גוף ייעודי רק ל־7.10, אך רלוונטי מאוד לילדים שהתייתמו או חוו אובדן.</p>
           <p><a href="https://www.hamaniot.org/" target="_blank" rel="noopener noreferrer">לאתר חמניות</a></p>
+          <button class="btn btn-secondary quick-contact-btn" type="button" data-org="חמניות" data-email="">פנייה מהירה מהאתר</button>
         </article>
       </div>
     
@@ -587,12 +632,37 @@
     </section>
   </main>
 
+
+  <div id="contactModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="targetOrgName">
+      <button class="modal-close" id="closeModalBtn" aria-label="סגירת חלון">×</button>
+      <h3>פנייה מהירה ל<span id="targetOrgName"></span></h3>
+      <p class="section-note" id="contactModalNote">אפשר ליצור טיוטת מייל ישירות מהמכשיר. הפרטים לא נשמרים בשרת.</p>
+      <form id="quickContactForm">
+        <div class="form-grid two-col">
+          <label>שם מלא
+            <input type="text" id="qName" autocomplete="off">
+          </label>
+          <label>טלפון לחזרה
+            <input type="tel" id="qPhone" autocomplete="off">
+          </label>
+        </div>
+        <label>במה דרוש סיוע?
+          <textarea id="qMessage" placeholder="למשל: הכוונה ראשונית, סיוע רגשי, בירור זכאות"></textarea>
+        </label>
+        <div class="actions-row">
+          <button type="button" class="btn btn-primary" id="sendQuickMailBtn">פתח/י טיוטת מייל</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer class="site-footer">
-    <div class="container footer-note-top">קישורים חיצוניים נפתחים בלשונית חדשה כדי שתוכלו לחזור בקלות לאתר.</div>
+    <div class="container footer-note-top">קישורים חיצוניים נפתחים בלשונית חדשה כדי שתוכלו לחזור בקלות לאתר. · עודכן לאחרונה: 17/03/2026</div>
     <div class="container footer-grid">
       <div>
         <strong>מרכז סיוע למשפחות שכולות 7.10</strong>
-        <p>מיזם מידע והכוונה למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023.</p>
+        <p>מיזם מידע והכוונה למשפחות שאיבדו את יקיריהן באירועי 7 באוקטובר 2023.</p><p class="small-note">האתר אינו מחליף ייעוץ משפטי, רפואי או רשמי של ביטוח לאומי, משרד הביטחון או כל גוף מוסמך אחר.</p>
       </div>
       <div>
         <strong>שקיפות</strong>
@@ -612,6 +682,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js?v=40"></script>
+  <script src="script.js?v=41"></script>
 </body>
 </html>

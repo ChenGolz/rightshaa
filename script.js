@@ -1,7 +1,7 @@
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js?v=40", { updateViaCache: "none" });
+    navigator.serviceWorker.register("service-worker.js?v=41", { updateViaCache: "none" });
   });
 }
 
@@ -42,7 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const smartTimelineOutput = $("smartTimelineOutput");
   const trackerStart = $("trackerStart");
   const trackerOutput = $("trackerOutput");
+
   const trackerTrack = $("trackerTrack");
+
+  const draftFields = ["letterName","letterId","letterRelation","letterDeceased","letterDate","letterTarget","letterNeed","letterPhone","letterEmail","letterOutput"];
+  draftFields.forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    const saved = localStorage.getItem("draft_" + id);
+    if (saved) el.value = saved;
+    el.addEventListener("input", () => localStorage.setItem("draft_" + id, el.value));
+    el.addEventListener("change", () => localStorage.setItem("draft_" + id, el.value));
+  });
 
   const setError = (id, text) => {
     const el = $(id + "Error");
@@ -77,6 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = (letterEmail?.value || "").trim();
 
     const lines = [];
+    const today = new Date().toLocaleDateString("he-IL");
+    lines.push("תאריך: " + today);
+    lines.push("");
     lines.push("לכבוד " + target + ",");
     lines.push("");
     lines.push("שלום רב,");
@@ -164,6 +178,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const downloadPdfBtn = $("downloadPdfBtn");
   if (downloadPdfBtn) downloadPdfBtn.onclick = downloadPdf;
+
+  const clearDraftBtn = $("clearDraftBtn");
+  if (clearDraftBtn) clearDraftBtn.onclick = () => {
+    ["letterName","letterId","letterRelation","letterDeceased","letterDate","letterTarget","letterNeed","letterPhone","letterEmail","letterOutput"].forEach((id) => {
+      localStorage.removeItem("draft_" + id);
+      const el = $(id);
+      if (el) el.value = "";
+    });
+    setError("letterDate", "");
+  };
 
   const generateMailBtn = $("generateMailBtn");
   if (generateMailBtn) generateMailBtn.onclick = () => {
@@ -309,9 +333,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const shareSiteBtn = $("shareSiteBtn");
-  if (shareSiteBtn) shareSiteBtn.onclick = () => {
+  if (shareSiteBtn) shareSiteBtn.onclick = async () => {
     const url = window.location.href;
-    const text = encodeURIComponent("מצאתי אתר שעוזר למשפחות שכולות מאירועי 7.10 להתמודד עם זכויות, בירוקרטיה ותמיכה: " + url);
+    const shareText = "מצאתי אתר שעוזר למשפחות שכולות מאירועי 7.10 להתמודד עם זכויות, בירוקרטיה ותמיכה: " + url;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "מרכז סיוע למשפחות שכולות 7.10", text: shareText, url });
+        return;
+      } catch (e) {}
+    }
+    const text = encodeURIComponent(shareText);
     window.open("https://wa.me/?text=" + text, "_blank");
   };
 
@@ -405,6 +436,10 @@ END:VCARD`;
       answer = "בשאלות על עבודה, כושר תעסוקתי או המשך טיפול מול הרשויות, כדאי להתחיל מביטוח לאומי ובמקביל לבדוק אם יש ליווי רגשי רלוונטי.";
     } else if (q.includes("הלוויה") || q.includes("קבורה")) {
       answer = "בנושאי הלוויה וקבורה כדאי לבדוק מול הגוף הרשמי המטפל, ובמקרים של זכויות והחזרים — מול ביטוח לאומי.";
+    } else if (q.includes("חו") || q.includes("בינלאומי") || q.includes("תרומות") || q.includes("פדרציות") || q.includes("אנגלית") || q.includes("onefamily")) {
+      answer = "לסיוע מחו״ל כדאי לבדוק את קרן נפגעי הטרור של הסוכנות היהודית, את OneFamily, ובמידת הצורך גם לחפש עמותות נוספות דרך גיידסטאר ישראל.";
+    } else if (q.includes("מלגות") || q.includes("לימודים")) {
+      answer = "למלגות לימודים כדאי לבדוק את אזור מלגות והטבות באתר, כולל אור למשפחות, יד לבנים ומלגת קק״ל — קרן ניקולא באומן.";
     }
     aiAnswer.innerHTML = `<div class="timeline-item">${answer}</div>`;
   };
@@ -492,4 +527,93 @@ END:VCARD`;
     }, { threshold: 0.15 });
     observer.observe(footer);
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-faq-tag]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const q = document.getElementById("aiQuestion");
+      const askBtn = document.getElementById("askAiBtn");
+      if (q) q.value = btn.dataset.faqTag;
+      if (askBtn) askBtn.click();
+      const faq = document.getElementById("aiAssistant");
+      if (faq) faq.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+
+  document.querySelectorAll('.checklist input').forEach((box) => {
+    const key = "check_" + box.dataset.check;
+    const saved = localStorage.getItem(key);
+    if (saved === "true") box.checked = true;
+    box.addEventListener("change", () => localStorage.setItem(key, String(box.checked)));
+  });
+
+  const copyChecklistBtn = document.getElementById("copyChecklistBtn");
+  if (copyChecklistBtn) copyChecklistBtn.onclick = async () => {
+    const labels = [...document.querySelectorAll(".checklist li")].map((li) => li.innerText.trim());
+    await navigator.clipboard.writeText(labels.map(t => "• " + t).join("\n"));
+    const old = copyChecklistBtn.textContent;
+    copyChecklistBtn.textContent = "הועתק";
+    setTimeout(() => copyChecklistBtn.textContent = old, 1500);
+  };
+
+  const clearChecklistBtn = document.getElementById("clearChecklistBtn");
+  if (clearChecklistBtn) clearChecklistBtn.onclick = () => {
+    document.querySelectorAll('.checklist input').forEach((box) => {
+      box.checked = false;
+      localStorage.removeItem("check_" + box.dataset.check);
+    });
+  };
+
+  let currentOrgEmail = "";
+  const modal = document.getElementById("contactModal");
+  const orgNameEl = document.getElementById("targetOrgName");
+  const modalNote = document.getElementById("contactModalNote");
+  const closeModal = () => {
+    if (modal) {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  };
+  document.querySelectorAll(".quick-contact-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentOrgEmail = btn.dataset.email || "";
+      if (orgNameEl) orgNameEl.textContent = btn.dataset.org || "";
+      if (modalNote) {
+        modalNote.textContent = currentOrgEmail
+          ? "אפשר ליצור טיוטת מייל ישירות לכתובת המוכרת לנו."
+          : "לא שמרנו כאן כתובת מייל ישירה של הארגון, לכן תיפתח טיוטת מייל ללא נמען ותוכלו להשלים את הכתובת ידנית.";
+      }
+      if (modal) {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+      }
+      document.getElementById("qName")?.focus();
+    });
+  });
+  document.getElementById("closeModalBtn")?.addEventListener("click", closeModal);
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.getElementById("sendQuickMailBtn")?.addEventListener("click", () => {
+    const name = (document.getElementById("qName")?.value || "").trim();
+    const phone = (document.getElementById("qPhone")?.value || "").trim();
+    const msg = (document.getElementById("qMessage")?.value || "").trim();
+    const org = orgNameEl?.textContent || "הארגון";
+    const subject = encodeURIComponent(`פנייה חדשה מהאתר: ${name || "ללא שם"} — ${org}`);
+    const bodyText = [
+      "שלום,",
+      "",
+      "נתקבלה פנייה חדשה מהאתר.",
+      name ? "שם: " + name : "",
+      phone ? "טלפון: " + phone : "",
+      msg ? "הודעה: " + msg : "",
+      "",
+      "תודה רבה."
+    ].filter(Boolean).join("\n");
+    const body = encodeURIComponent(bodyText).replace(/%0A/g, "%0D%0A");
+    const to = currentOrgEmail ? currentOrgEmail : "";
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    closeModal();
+  });
 });
