@@ -101,8 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return lines.join("\\n");
   }
 
-  const generateLetterBtn = $("generateLetter");
-  if (generateLetterBtn) generateLetterBtn.onclick = () => {
+  $("generateLetter").onclick = () => {
     setError("letterDate", "");
     if (isFutureDate(letterDate.value)) {
       setError("letterDate", "נא להזין תאריך מהעבר.");
@@ -111,8 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     letterOutput.value = buildLetterText();
   };
 
-  const copyLetterBtn = $("copyLetter");
-  if (copyLetterBtn) copyLetterBtn.onclick = async () => {
+  $("copyLetter").onclick = async () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
     await navigator.clipboard.writeText(letterOutput.value);
     const old = $("copyLetter").textContent;
@@ -136,13 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
     }).from(wrapper).save();
   }
-  const downloadPdfBtn = $("downloadPdfBtn");
-  const downloadPdfTop = $("downloadPdfTop");
-  if (downloadPdfBtn) downloadPdfBtn.onclick = downloadPdf;
-  if (downloadPdfTop) downloadPdfTop.onclick = downloadPdf;
+  $("downloadPdfBtn").onclick = downloadPdf;
+  $("downloadPdfTop").onclick = downloadPdf;
 
-  const generateMailBtn = $("generateMailBtn");
-  if (generateMailBtn) generateMailBtn.onclick = () => {
+  $("generateMailBtn").onclick = () => {
     if (!letterOutput.value) letterOutput.value = buildLetterText();
     const subject = encodeURIComponent("פנייה בנושא זכויות וסיוע למשפחת 7.10");
     const body = encodeURIComponent(letterOutput.value || "");
@@ -180,8 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const buildSmartTimelineBtn = $("buildSmartTimeline");
-  if (buildSmartTimelineBtn) buildSmartTimelineBtn.onclick = () => {
+  $("buildSmartTimeline").onclick = () => {
     setError("smartDeathDate", "");
     if (!smartDeathDate.value) {
       setError("smartDeathDate", "נא להזין תאריך.");
@@ -194,15 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSmartTimeline(smartDeathDate.value);
   };
 
-  const clearSmartTimelineBtn = $("clearSmartTimeline");
-  if (clearSmartTimelineBtn) clearSmartTimelineBtn.onclick = () => {
+  $("clearSmartTimeline").onclick = () => {
     smartDeathDate.value = "";
     smartTimelineOutput.innerHTML = "";
     setError("smartDeathDate", "");
   };
 
-  const addMemorialCalendarBtn = $("addMemorialCalendarBtn");
-  if (addMemorialCalendarBtn) addMemorialCalendarBtn.onclick = () => {
+  $("addMemorialCalendarBtn").onclick = () => {
     const sourceDate = smartDeathDate.value || letterDate.value;
     setError("smartDeathDate", "");
     if (!sourceDate) {
@@ -223,8 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}`, "_blank");
   };
 
-  const buildTrackerBtn = $("buildTracker");
-  if (buildTrackerBtn) buildTrackerBtn.onclick = () => {
+  $("buildTracker").onclick = () => {
     setError("trackerStart", "");
     if (!trackerStart.value) {
       setError("trackerStart", "נא להזין תאריך התחלה.");
@@ -258,22 +249,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const clearTrackerBtn = $("clearTracker");
-  if (clearTrackerBtn) clearTrackerBtn.onclick = () => {
+  $("clearTracker").onclick = () => {
     trackerStart.value = "";
     trackerOutput.innerHTML = "";
     setError("trackerStart", "");
   };
 
-  const shareSiteBtn = $("shareSiteBtn");
-  if (shareSiteBtn) shareSiteBtn.onclick = () => {
+  $("shareSiteBtn").onclick = () => {
     const url = window.location.href;
     const text = encodeURIComponent("מצאתי אתר שעוזר למשפחות שכולות מאירועי 7.10 להתמודד עם זכויות, בירוקרטיה ותמיכה: " + url);
     window.open("https://wa.me/?text=" + text, "_blank");
   };
 
-  const floatingBreatheBtn = $("floatingBreathe");
-  if (floatingBreatheBtn) floatingBreatheBtn.onclick = () => {
+  $("floatingBreathe").onclick = () => {
     $("breatheSection").scrollIntoView({behavior:"smooth"});
   };
 
@@ -291,8 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     breatheStatus.textContent = "מוכנים להתחיל";
   }
 
-  const startBreatheBtn = $("startBreathe");
-  if (startBreatheBtn) startBreatheBtn.onclick = () => {
+  $("startBreathe").onclick = () => {
     stopBreathing();
     let i = 0;
     let rounds = 4;
@@ -313,8 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
     breatheInterval = setInterval(nextPhase, 4000);
   };
 
-  const stopBreatheBtn = $("stopBreathe");
-  if (stopBreatheBtn) stopBreatheBtn.onclick = stopBreathing;
+  $("stopBreathe").onclick = stopBreathing;
 
   function downloadVCard(name, phone){
     const vcard = `BEGIN:VCARD
@@ -335,8 +321,7 @@ END:VCARD`;
     btn.addEventListener("click", () => downloadVCard(btn.dataset.name, btn.dataset.phone));
   });
 
-  const askAiBtn = $("askAiBtn");
-  if (askAiBtn) askAiBtn.onclick = () => {
+  $("askAiBtn").onclick = () => {
     const q = ($("aiQuestion").value || "").toLowerCase().trim();
     const aiAnswer = $("aiAnswer");
     if (!q) {
@@ -357,21 +342,17 @@ END:VCARD`;
     aiAnswer.innerHTML = `<div class="timeline-item">${answer}</div>`;
   };
 
-  const helpMapEl = $("helpMap");
-  let map = null;
-  if (helpMapEl && window.L) {
-    map = L.map("helpMap").setView([31.55, 34.75], 8);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  const map = L.map("helpMap").setView([31.55, 34.75], 8);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution: "&copy; OpenStreetMap"
-    }).addTo(map);
+  }).addTo(map);
 
-    mapPoints.forEach((p) => {
+  mapPoints.forEach((p) => {
     L.marker([p.lat, p.lng]).addTo(map).bindPopup(
       `<strong>${p.name}</strong><br>${p.type}<br>${p.address}<br><small>מיקום להמחשה.</small>`
     );
-    });
-  }
+  });
 
   function haversineKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
@@ -384,8 +365,7 @@ END:VCARD`;
     return 2 * R * Math.asin(Math.sqrt(a));
   }
 
-  const locateMeBtn = $("locateMeBtn");
-  if (locateMeBtn) locateMeBtn.onclick = () => {
+  $("locateMeBtn").onclick = () => {
     const btn = $("locateMeBtn");
     const mapStatus = $("mapStatus");
     const defaultLabel = "מצא מרכז קרוב אליי";
@@ -403,10 +383,8 @@ END:VCARD`;
       (pos) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
-        if (map) {
-          map.setView([userLat, userLng], 10);
-          L.marker([userLat, userLng]).addTo(map).bindPopup("המיקום שלי");
-        }
+        map.setView([userLat, userLng], 10);
+        L.marker([userLat, userLng]).addTo(map).bindPopup("המיקום שלי");
 
         const nearest = mapPoints
           .map((p) => ({...p, distance: haversineKm(userLat, userLng, p.lat, p.lng)}))

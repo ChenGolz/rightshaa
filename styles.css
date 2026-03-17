@@ -373,12 +373,6 @@ textarea{min-height:220px; resize:vertical}
 .coming-soon{
   opacity:.85;
 }
-
-
-.support-centers-grid .mini-card p{
-  line-height:1.9;
-  font-size:.96rem;
-}
-.support-centers-grid .mini-card a{
-  word-break:break-word;
+#btlPractical .mini-card{
+  min-height:100%;
 }
