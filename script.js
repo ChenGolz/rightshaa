@@ -210,11 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
-  }
-);
-  }
-
-
   const buildTrackerBtn = $("buildTracker");
   if (buildTrackerBtn) buildTrackerBtn.onclick = () => {
     setError("trackerStart", "");
